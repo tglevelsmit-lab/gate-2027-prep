@@ -290,119 +290,58 @@
   </section>
 
   <section>
-    <h2><span class="num">02</span> Books — one primary each, and what to skip</h2>
-    <p class="lede">Do not read these cover to cover. With 25 weeks you read only the chapters that previous-year questions actually touch, and you use the book as a reference when a problem defeats you. The "skip / go light" column is as important as the book itself.</p>
+    <h2><span class="num">02</span> Your library — already in the folder</h2>
+    <p class="lede">Nothing here needs buying. Fourteen openly-licensed textbooks, one per subject, each sitting in the same week folder as that subject's questions and carrying the same week prefix. Learn from the <code>--BOOK-</code> file, then solve the questions file next to it. Read only the sections covering the current topic — a week is four to six topics, not four hundred pages.</p>
     <div class="scroller">
       <table>
         <thead>
           <tr>
-            <th>Subject</th>
-            <th>Primary book</th>
-            <th>Read</th>
-            <th>Skip or go light</th>
+            <th>Week folder</th>
+            <th>Book</th>
+            <th>Source</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Discrete Maths</td>
-            <td class="book">Kenneth Rosen — <em>Discrete Mathematics and Its Applications</em></td>
-            <td>Logic, sets/relations/functions, counting, recurrences, generating functions, graphs, lattices</td>
-            <td>Rosen's algorithms and number-theory chapters; get monoids/groups from lecture notes instead — Rosen is thin there</td>
-          </tr>
-          <tr>
-            <td>Linear Algebra</td>
-            <td class="book">Gilbert Strang — <em>Introduction to Linear Algebra</em></td>
-            <td>Ch 1–3 (systems, elimination, LU), Ch 5 (determinants), Ch 6 (eigenvalues)</td>
-            <td>Vector spaces beyond rank/nullity, SVD, everything after Ch 6</td>
-          </tr>
-          <tr>
-            <td>Calculus</td>
-            <td class="book">B. S. Grewal — <em>Higher Engineering Mathematics</em></td>
-            <td>Limits, continuity, differentiability, maxima/minima, Rolle/Lagrange MVT, definite &amp; improper integrals</td>
-            <td>Differential equations, vector calculus, transforms — not in the CS syllabus</td>
-          </tr>
-          <tr>
-            <td>Probability</td>
-            <td class="book">Sheldon Ross — <em>A First Course in Probability</em></td>
-            <td>Ch 1–5 and Ch 7: conditional probability, Bayes, random variables, the five named distributions, expectation</td>
-            <td>Ch 6 joint distributions in depth, limit theorems, Markov chains</td>
-          </tr>
-          <tr>
-            <td>Digital Logic</td>
-            <td class="book">M. Morris Mano — <em>Digital Design</em></td>
-            <td>Ch 1–6 entirely, plus fixed/floating point (IEEE 754) from any source</td>
-            <td>VHDL/Verilog sections, memory &amp; PLD chapter beyond basics</td>
-          </tr>
-          <tr>
-            <td>Computer Organisation</td>
-            <td class="book">Carl Hamacher — <em>Computer Organization</em> + Patterson &amp; Hennessy for pipelining/cache</td>
-            <td>Addressing modes, ALU design, hardwired vs microprogrammed control, cache mapping, DMA/interrupts, pipeline hazards</td>
-            <td>Hamacher's processor case studies, multiprocessor chapters, I/O device internals</td>
-          </tr>
-          <tr>
-            <td>C Programming</td>
-            <td class="book">Kernighan &amp; Ritchie — <em>The C Programming Language</em></td>
-            <td>Ch 1–6 and Appendix on operator precedence; then Kanetkar's <em>Test Your C Skills</em> for pointer traps</td>
-            <td>Ch 7–8 (stdio internals, UNIX interface)</td>
-          </tr>
-          <tr>
-            <td>Data Structures</td>
-            <td class="book">Tenenbaum — <em>Data Structures Using C</em></td>
-            <td>All of it — arrays, stacks, queues, lists, trees, BSTs, heaps, graph representations</td>
-            <td>Nothing; this is your highest-weight subject</td>
-          </tr>
-          <tr>
-            <td>Algorithms</td>
-            <td class="book">Cormen et al. — <em>Introduction to Algorithms (CLRS)</em></td>
-            <td>Ch 2–4, 6–9, 11, 15–16, 22–25 — sorting, hashing, recurrences, greedy, DP, graphs, MST, shortest paths</td>
-            <td>Amortised analysis proofs, Fibonacci heaps, flow networks, NP-completeness proofs, all number-theoretic chapters</td>
-          </tr>
-          <tr>
-            <td>Theory of Computation</td>
-            <td class="book">Peter Linz — <em>An Introduction to Formal Languages and Automata</em></td>
-            <td>Ch 1–12 — this book is almost exactly the GATE syllabus. Add Sipser Ch 4–5 for undecidability and reductions</td>
-            <td>Linz's chapter on other models of computation; Hopcroft-Ullman unless you want extra rigour</td>
-          </tr>
-          <tr>
-            <td>Compiler Design</td>
-            <td class="book">Aho, Lam, Sethi, Ullman — <em>Compilers (the Dragon Book)</em></td>
-            <td>Ch 3 (lexical), Ch 4 (parsing), Ch 5 (SDT), Ch 6 (intermediate code), Ch 7 (runtime), Ch 8.5–8.7 &amp; 9.2–9.4 (local optimisation, data flow)</td>
-            <td>Ch 10–12 entirely; the Dragon Book is far deeper than GATE needs — use it as a reference, not a read-through</td>
-          </tr>
-          <tr>
-            <td>Operating Systems</td>
-            <td class="book">Silberschatz &amp; Galvin — <em>Operating System Concepts</em></td>
-            <td>Processes, threads, IPC, synchronisation, deadlock, CPU scheduling, memory management, virtual memory, file systems, disk scheduling</td>
-            <td>Distributed systems, protection/security, case-study chapters</td>
-          </tr>
-          <tr>
-            <td>Databases</td>
-            <td class="book">Korth &amp; Sudarshan — <em>Database System Concepts</em>; Navathe for ER and normalisation</td>
-            <td>Relational model, algebra, tuple calculus, SQL, constraints, normal forms, indexing, transactions, concurrency control</td>
-            <td>Query optimisation internals, recovery beyond basics, data warehousing, NoSQL</td>
-          </tr>
-          <tr>
-            <td>Computer Networks</td>
-            <td class="book">Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach</em>; Tanenbaum for the data link layer</td>
-            <td>Layering, switching, delay/throughput, error detection &amp; CRC, MAC and Ethernet, DV/LS routing, IPv4, fragmentation, CIDR, NAT, TCP flow &amp; congestion, sockets, DNS, HTTP</td>
-            <td>Wireless, multimedia, network security chapters</td>
-          </tr>
-          <tr>
-            <td>General Aptitude</td>
-            <td class="book">R. S. Aggarwal — <em>Quantitative Aptitude</em> and <em>Verbal &amp; Non-Verbal Reasoning</em></td>
-            <td>Only the chapters GATE asks: ratios, percentages, time-work-speed, permutations, data interpretation, series, syllogisms, reading comprehension</td>
-            <td>Everything else in those very fat books</td>
-          </tr>
+          <tr><td>W01 Programming in C</td><td class="book">Jens Gustedt — <em>Modern C</em></td><td>INRIA, free</td></tr>
+          <tr><td>W02–03 Data Structures</td><td class="book">Pat Morin — <em>Open Data Structures</em></td><td>CC BY</td></tr>
+          <tr><td>W04–05 Algorithms</td><td class="book">Jeff Erickson — <em>Algorithms</em></td><td>CC BY 4.0 — 10 chapters; max-flow and NP-hardness omitted, not in syllabus</td></tr>
+          <tr><td>W06–07 Digital Logic</td><td class="book">David Tarnoff — <em>Computer Organization and Design Fundamentals</em></td><td>ETSU open resource</td></tr>
+          <tr><td>W07–09 Computer Organisation</td><td class="book">Tarnoff, same book</td><td>ETSU open resource</td></tr>
+          <tr><td>W09–11 Operating Systems</td><td class="book">Arpaci-Dusseau — <em>OSTEP</em></td><td>free; 68 chapters merged into one file</td></tr>
+          <tr><td>W12–14 Theory of Computation</td><td class="book">Maheshwari &amp; Smid — <em>Introduction to Theory of Computation</em></td><td>Carleton, free</td></tr>
+          <tr><td>W13–14 Compiler Design</td><td class="book">Torben Mogensen — <em>Basics of Compiler Design</em></td><td>DIKU, free</td></tr>
+          <tr><td>W15 Databases</td><td class="book">Watt &amp; Eng — <em>Database Design</em></td><td>CC BY — see the gap below</td></tr>
+          <tr><td>W16 Computer Networks</td><td class="book">Peterson &amp; Davie — <em>Computer Networks: A Systems Approach</em></td><td>CC BY 4.0</td></tr>
+          <tr><td>W01–02 Set Theory, Lattices, Groups</td><td class="book">Doerr &amp; Levasseur — <em>Applied Discrete Structures</em></td><td>CC BY-NC-SA</td></tr>
+          <tr><td>W03 / W04–05 / W06 maths</td><td class="book">Lehman, Leighton, Meyer — <em>Mathematics for Computer Science</em></td><td>MIT 6.042, CC BY-SA</td></tr>
+          <tr><td>W07–08 Linear Algebra</td><td class="book">Jim Hefferon — <em>Linear Algebra</em></td><td>CC BY-SA / GFDL</td></tr>
+          <tr><td>W09–10 Calculus</td><td class="book">OpenStax — <em>Calculus Volume 1</em></td><td>CC BY-NC-SA</td></tr>
+          <tr><td>W11–12 Probability</td><td class="book">Grinstead &amp; Snell — <em>Introduction to Probability</em></td><td>GFDL</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3>The practice layer — this is where the marks come from</h3>
+    <h3>Four places these books don't reach</h3>
+    <p>Checked by searching the actual text, not assumed. Each has a free fix — reach for it in the week shown, not on exam eve.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Gap</th><th class="n">Week</th><th>Free fix</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Quine–McCluskey</strong> — absent from Tarnoff entirely, though it is explicitly in the 2027 syllabus</td><td class="n">W6</td><td>One Neso Academy or NPTEL <em>Digital Circuits</em> lecture</td></tr>
+          <tr><td><strong>B/B+ trees, transactions, serialisability</strong> — the Watt book stops after ER, normalisation and SQL. This is close to half of GATE's database marks and is the one real hole</td><td class="n">W15</td><td>NPTEL <em>Database Management System</em>, indexing and transactions modules</td></tr>
+          <tr><td><strong>Counting and radix sort, sort stability, exact comparison counts</strong> — Erickson has mergesort, quicksort and heaps but not these</td><td class="n">W4</td><td>The key-concepts section at the front of the questions file; MIT 6.006 on OCW</td></tr>
+          <tr><td><strong>Improper integrals</strong> — OpenStax Volume 1 stops before them</td><td class="n">W9</td><td>OpenStax <em>Calculus Volume 2</em>, Ch 3 — free download</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Everything else was verified present: pipelining and cache in Tarnoff, pumping lemma and undecidability in Maheshwari &amp; Smid, liveness and constant propagation in Mogensen, CIDR, NAT and the socket API in Peterson &amp; Davie, deadlock and page replacement in OSTEP, and monoids, groups, lattices and generating functions in Applied Discrete Structures — precisely the topics flagged in section 06 as having thin previous-year coverage.</p>
+
+    <h3>The practice layer — also already downloaded</h3>
     <ul>
-      <li><strong>Previous-year questions, 2010–2026</strong> — roughly 1,500 questions, topic-wise. This is non-negotiable and you will do three passes. GATE Overflow's free compiled book (with community solutions) is the standard source; Made Easy or Ace topic-wise workbooks work equally well on paper.</li>
-      <li><strong>One video course per weak subject only.</strong> Don't watch lectures for subjects you can read. Reserve video for whatever refuses to click — commonly TOC, compilers, or pipelining.</li>
-      <li><strong>One paid test series</strong>, booked by early November. Any of GO Classes, Made Easy, Ace, or Applied Course is fine — what matters is that it exists and you sit the tests on schedule.</li>
-      <li><strong>A standard formula/short-notes booklet</strong> you write yourself as you go. Not bought. Writing it is the revision.</li>
+      <li><strong>~3,800 previous-year questions, 1987 → GATE 2026</strong>, split by subject and labelled by week. You will do three passes. Answers are included; <em>explanations are not</em> — each question carries a QR code to its discussion on gateoverflow.in, so plan on being online while solving.</li>
+      <li><strong>15 original papers, 2016–2026, plus 8 official answer keys</strong>, in exam format, held back for January.</li>
+      <li><strong>Short notes you write yourself</strong> as you go. Not bought, not downloaded. Writing them is the revision.</li>
+      <li><strong>The one thing still missing: a test series.</strong> It is the only paid item left, and nothing free replaces it — no question bank can tell you your percentile against the actual candidate pool, or how you handle a question nobody has seen before. Book one by early November.</li>
     </ul>
   </section>
 
@@ -512,14 +451,14 @@
       <table>
         <thead><tr><th>Topic</th><th>Where to learn it</th><th class="n">Risk</th></tr></thead>
         <tbody>
-          <tr><td>Quine–McCluskey (tabular minimisation)</td><td>Mano Ch 3 supplement, or any standard digital-design text's tabular-method section</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
-          <tr><td>LU decomposition</td><td>Strang Ch 2.6 — know how to produce L and U by hand for a 3×3</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
-          <tr><td>Monoids and groups</td><td>Rosen is weak here; use a discrete-structures lecture series. Know closure, identity, inverse, subgroups, Lagrange's theorem</td><td class="n"><span class="pill p-hi">High</span></td></tr>
-          <tr><td>Generating functions</td><td>Rosen Ch 8.4 — solving recurrences and counting with them</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
-          <tr><td>Socket API</td><td>Kurose Ch 2.7 — the call sequence and which call blocks, for TCP and UDP</td><td class="n"><span class="pill p-hi">High</span></td></tr>
-          <tr><td>NAT</td><td>Kurose Ch 4.3 — translation-table mechanics, port rewriting</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
-          <tr><td>Median, mode, standard deviation</td><td>Any statistics primer; trivial to learn, easy to forget to</td><td class="n"><span class="pill p-lo">Low</span></td></tr>
-          <tr><td>Data flow analysis</td><td>Dragon Book Ch 9.2–9.4 — constant propagation, liveness, common subexpression elimination on a given flow graph</td><td class="n"><span class="pill p-hi">High</span></td></tr>
+          <tr><td>Quine–McCluskey (tabular minimisation)</td><td><strong>Not in Tarnoff</strong> — one Neso Academy or NPTEL <em>Digital Circuits</em> lecture, in W6</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>LU decomposition</td><td>Hefferon, the Gauss's-method chapter — produce L and U by hand for a 3×3</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>Monoids and groups</td><td>Applied Discrete Structures covers this well — closure, identity, inverse, subgroups, Lagrange's theorem</td><td class="n"><span class="pill p-hi">High</span></td></tr>
+          <tr><td>Generating functions</td><td>Applied Discrete Structures, generating-functions chapter — solving recurrences and counting with them</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>Socket API</td><td>Peterson &amp; Davie, the socket-API section — the call sequence and which call blocks, for TCP and UDP</td><td class="n"><span class="pill p-hi">High</span></td></tr>
+          <tr><td>NAT</td><td>Peterson &amp; Davie, the IPv4/NAT section — translation-table mechanics, port rewriting</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>Median, mode, standard deviation</td><td>Grinstead &amp; Snell, opening chapters; trivial to learn, easy to forget to</td><td class="n"><span class="pill p-lo">Low</span></td></tr>
+          <tr><td>Data flow analysis</td><td>Mogensen, the data-flow-analysis chapter — constant propagation, liveness, common subexpression elimination on a flow graph</td><td class="n"><span class="pill p-hi">High</span></td></tr>
         </tbody>
       </table>
     </div>
