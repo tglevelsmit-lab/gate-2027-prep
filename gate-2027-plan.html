@@ -1,0 +1,543 @@
+<title>GATE 2027 CS — 25-Week Plan to 75+</title>
+<style>
+  :root {
+    --ground:      #F6F8F7;
+    --surface:     #FFFFFF;
+    --surface-alt: #EDF2F1;
+    --line:        #D3DDDB;
+    --line-soft:   #E4EBEA;
+    --ink:         #121A19;
+    --ink-muted:   #57635F;
+    --ink-faint:   #7C8783;
+    --accent:      #10555A;
+    --accent-soft: #DCEBEA;
+    --good:        #3E6B2E;
+    --warn:        #8A6210;
+    --warn-soft:   #F6EEDA;
+    --crit:        #9A302A;
+    --shadow:      0 1px 2px rgba(18,26,25,.06), 0 8px 24px -16px rgba(18,26,25,.28);
+
+    --f-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --f-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --f-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0D1413;
+      --surface:     #141D1C;
+      --surface-alt: #1B2625;
+      --line:        #2C3937;
+      --line-soft:   #222D2C;
+      --ink:         #E4EBE9;
+      --ink-muted:   #9AA8A4;
+      --ink-faint:   #74827E;
+      --accent:      #63C6C2;
+      --accent-soft: #16302F;
+      --good:        #8FC073;
+      --warn:        #D9AC4E;
+      --warn-soft:   #2B2415;
+      --crit:        #E08078;
+      --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0D1413;
+    --surface:     #141D1C;
+    --surface-alt: #1B2625;
+    --line:        #2C3937;
+    --line-soft:   #222D2C;
+    --ink:         #E4EBE9;
+    --ink-muted:   #9AA8A4;
+    --ink-faint:   #74827E;
+    --accent:      #63C6C2;
+    --accent-soft: #16302F;
+    --good:        #8FC073;
+    --warn:        #D9AC4E;
+    --warn-soft:   #2B2415;
+    --crit:        #E08078;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; flex-direction: column; gap: 1.25rem; }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -.015em;
+    text-wrap: balance;
+  }
+  .standfirst {
+    max-width: 62ch;
+    color: var(--ink-muted);
+    font-size: 1.05rem;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .fact { background: var(--surface); padding: .9rem 1rem; display: flex; flex-direction: column; gap: .15rem; }
+  .fact b {
+    font-family: var(--f-mono);
+    font-size: 1.35rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+  }
+  .fact span { font-size: .74rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 1.25rem; }
+  h2 {
+    font-family: var(--f-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+  }
+  h2 .num {
+    font-family: var(--f-mono);
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: .1em;
+  }
+  h3 {
+    font-family: var(--f-body);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  p { max-width: 68ch; }
+  .lede { color: var(--ink-muted); max-width: 68ch; }
+
+  /* ---------- tables ---------- */
+  .scroller { overflow-x: auto; border: 1px solid var(--line); border-radius: 3px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .875rem; }
+  th, td { text-align: left; padding: .6rem .8rem; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  thead th {
+    background: var(--surface-alt);
+    font-size: .7rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.n, th.n { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.wk { font-family: var(--f-mono); font-size: .78rem; white-space: nowrap; color: var(--ink-muted); }
+  td.wk b { display: block; color: var(--accent); font-weight: 600; }
+  tfoot td { font-weight: 700; border-top: 2px solid var(--ink); background: var(--surface-alt); }
+  .book { font-family: var(--f-display); font-size: .95rem; }
+  .book em { color: var(--ink-muted); font-style: normal; display: block; font-family: var(--f-body); font-size: .8rem; }
+
+  /* ---------- pills ---------- */
+  .pill {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: .68rem;
+    letter-spacing: .05em;
+    padding: .1rem .45rem;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .p-hi { color: var(--crit); }
+  .p-mid { color: var(--warn); }
+  .p-lo { color: var(--ink-faint); }
+
+  /* ---------- phase rail ---------- */
+  .phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+  .phase {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: 3px;
+    padding: 1.1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: var(--shadow);
+  }
+  .phase .when { font-family: var(--f-mono); font-size: .74rem; color: var(--accent); letter-spacing: .04em; }
+  .phase h4 { font-family: var(--f-display); font-size: 1.2rem; font-weight: 600; }
+  .phase p { font-size: .875rem; color: var(--ink-muted); margin: 0; }
+
+  /* ---------- callout ---------- */
+  .note {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: .9rem 1.1rem;
+    border-radius: 0 3px 3px 0;
+    font-size: .9rem;
+  }
+  .note strong { color: var(--warn); }
+  .note p { max-width: none; margin: 0; }
+
+  ul, ol { padding-left: 1.15rem; display: flex; flex-direction: column; gap: .4rem; max-width: 68ch; }
+  li::marker { color: var(--accent); }
+  code { font-family: var(--f-mono); font-size: .85em; background: var(--surface-alt); padding: .08em .35em; border-radius: 2px; }
+  strong { font-weight: 650; }
+  a { color: var(--accent); }
+  a:focus-visible, :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  hr { border: none; border-top: 1px solid var(--line); }
+
+  .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.5rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+  .card ul { font-size: .875rem; }
+
+  footer { color: var(--ink-faint); font-size: .8rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Computer Science &amp; IT · Organising institute IIT Madras</div>
+    <h1>GATE 2027: a 25-week plan to 75+ marks</h1>
+    <p class="standfirst">Starting 11 August 2026, you have roughly 25 usable weeks before the paper. That is enough for one careful pass over all ten subjects plus three revisions — but only if the first pass never stalls. This is the book list, the week-by-week route, and the mark arithmetic that gets you past 75.</p>
+    <div class="facts">
+      <div class="fact"><b>179</b><span>Days to exam</span></div>
+      <div class="fact"><b>25</b><span>Usable weeks</span></div>
+      <div class="fact"><b>~1,450</b><span>Study hours needed</span></div>
+      <div class="fact"><b>8–9 h</b><span>Per day, full-time</span></div>
+      <div class="fact"><b>76</b><span>Target raw score</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="num">01</span> The number you are actually chasing</h2>
+    <p class="lede">In recent CS papers, ~66–70 raw marks lands near AIR 300 and ~75 lands closer to AIR 120–180. Targeting 76 gives you a cushion for one bad section on exam day. Here is where those 76 marks come from — this table is the plan's spine, and every hour below is allocated against it.</p>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th class="n">Paper weight</th>
+            <th class="n">Your target</th>
+            <th>Why this target</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>General Aptitude</td><td class="n">15</td><td class="n">14</td><td>Cheapest marks in the paper. Nobody in the top 300 drops these.</td></tr>
+          <tr><td>Programming &amp; Data Structures</td><td class="n">11</td><td class="n">8</td><td>Highest-weight core subject; C output questions are fully learnable.</td></tr>
+          <tr><td>Operating Systems</td><td class="n">9</td><td class="n">7</td><td>Formulaic and repetitive across years. Should be a strength.</td></tr>
+          <tr><td>Theory of Computation</td><td class="n">8</td><td class="n">6.5</td><td>Small syllabus, huge return. Closure-property questions are free.</td></tr>
+          <tr><td>Algorithms</td><td class="n">8</td><td class="n">5.5</td><td>DP and graph questions get genuinely hard; bank the standard ones.</td></tr>
+          <tr><td>Discrete Mathematics</td><td class="n">7</td><td class="n">5.5</td><td>Counting and graph theory are reliable; skip nothing here.</td></tr>
+          <tr><td>Computer Organisation</td><td class="n">7</td><td class="n">5</td><td>Cache and pipelining alone are worth ~4–5 most years.</td></tr>
+          <tr><td>Databases</td><td class="n">7</td><td class="n">6</td><td>Normalisation, SQL and B+ trees are near-guaranteed marks.</td></tr>
+          <tr><td>Computer Networks</td><td class="n">7</td><td class="n">5.5</td><td>Subnetting, TCP windows and CRC repeat almost yearly.</td></tr>
+          <tr><td>Linear Algebra · Calculus · Probability</td><td class="n">7</td><td class="n">4.5</td><td>Probability is the reliable half; calculus questions can be nasty.</td></tr>
+          <tr><td>Digital Logic</td><td class="n">6</td><td class="n">5</td><td>Number systems and floating point are pure practice marks.</td></tr>
+          <tr><td>Compiler Design</td><td class="n">5</td><td class="n">3.5</td><td>Parsing tables are mechanical; optimisation is where you lose.</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>Total</td><td class="n">~97</td><td class="n">76</td><td>Roughly 78% accuracy across the paper.</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="note"><p><strong>Read this before anything else.</strong> Weights shift ±3 marks year to year, so no subject is safe to drop. What kills 70+ attempts is not a missing subject — it is a first pass that runs three weeks late and eats the revision phase. Protect the calendar over the completeness of any single topic.</p></div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span> Books — one primary each, and what to skip</h2>
+    <p class="lede">Do not read these cover to cover. With 25 weeks you read only the chapters that previous-year questions actually touch, and you use the book as a reference when a problem defeats you. The "skip / go light" column is as important as the book itself.</p>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Primary book</th>
+            <th>Read</th>
+            <th>Skip or go light</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Discrete Maths</td>
+            <td class="book">Kenneth Rosen — <em>Discrete Mathematics and Its Applications</em></td>
+            <td>Logic, sets/relations/functions, counting, recurrences, generating functions, graphs, lattices</td>
+            <td>Rosen's algorithms and number-theory chapters; get monoids/groups from lecture notes instead — Rosen is thin there</td>
+          </tr>
+          <tr>
+            <td>Linear Algebra</td>
+            <td class="book">Gilbert Strang — <em>Introduction to Linear Algebra</em></td>
+            <td>Ch 1–3 (systems, elimination, LU), Ch 5 (determinants), Ch 6 (eigenvalues)</td>
+            <td>Vector spaces beyond rank/nullity, SVD, everything after Ch 6</td>
+          </tr>
+          <tr>
+            <td>Calculus</td>
+            <td class="book">B. S. Grewal — <em>Higher Engineering Mathematics</em></td>
+            <td>Limits, continuity, differentiability, maxima/minima, Rolle/Lagrange MVT, definite &amp; improper integrals</td>
+            <td>Differential equations, vector calculus, transforms — not in the CS syllabus</td>
+          </tr>
+          <tr>
+            <td>Probability</td>
+            <td class="book">Sheldon Ross — <em>A First Course in Probability</em></td>
+            <td>Ch 1–5 and Ch 7: conditional probability, Bayes, random variables, the five named distributions, expectation</td>
+            <td>Ch 6 joint distributions in depth, limit theorems, Markov chains</td>
+          </tr>
+          <tr>
+            <td>Digital Logic</td>
+            <td class="book">M. Morris Mano — <em>Digital Design</em></td>
+            <td>Ch 1–6 entirely, plus fixed/floating point (IEEE 754) from any source</td>
+            <td>VHDL/Verilog sections, memory &amp; PLD chapter beyond basics</td>
+          </tr>
+          <tr>
+            <td>Computer Organisation</td>
+            <td class="book">Carl Hamacher — <em>Computer Organization</em> + Patterson &amp; Hennessy for pipelining/cache</td>
+            <td>Addressing modes, ALU design, hardwired vs microprogrammed control, cache mapping, DMA/interrupts, pipeline hazards</td>
+            <td>Hamacher's processor case studies, multiprocessor chapters, I/O device internals</td>
+          </tr>
+          <tr>
+            <td>C Programming</td>
+            <td class="book">Kernighan &amp; Ritchie — <em>The C Programming Language</em></td>
+            <td>Ch 1–6 and Appendix on operator precedence; then Kanetkar's <em>Test Your C Skills</em> for pointer traps</td>
+            <td>Ch 7–8 (stdio internals, UNIX interface)</td>
+          </tr>
+          <tr>
+            <td>Data Structures</td>
+            <td class="book">Tenenbaum — <em>Data Structures Using C</em></td>
+            <td>All of it — arrays, stacks, queues, lists, trees, BSTs, heaps, graph representations</td>
+            <td>Nothing; this is your highest-weight subject</td>
+          </tr>
+          <tr>
+            <td>Algorithms</td>
+            <td class="book">Cormen et al. — <em>Introduction to Algorithms (CLRS)</em></td>
+            <td>Ch 2–4, 6–9, 11, 15–16, 22–25 — sorting, hashing, recurrences, greedy, DP, graphs, MST, shortest paths</td>
+            <td>Amortised analysis proofs, Fibonacci heaps, flow networks, NP-completeness proofs, all number-theoretic chapters</td>
+          </tr>
+          <tr>
+            <td>Theory of Computation</td>
+            <td class="book">Peter Linz — <em>An Introduction to Formal Languages and Automata</em></td>
+            <td>Ch 1–12 — this book is almost exactly the GATE syllabus. Add Sipser Ch 4–5 for undecidability and reductions</td>
+            <td>Linz's chapter on other models of computation; Hopcroft-Ullman unless you want extra rigour</td>
+          </tr>
+          <tr>
+            <td>Compiler Design</td>
+            <td class="book">Aho, Lam, Sethi, Ullman — <em>Compilers (the Dragon Book)</em></td>
+            <td>Ch 3 (lexical), Ch 4 (parsing), Ch 5 (SDT), Ch 6 (intermediate code), Ch 7 (runtime), Ch 8.5–8.7 &amp; 9.2–9.4 (local optimisation, data flow)</td>
+            <td>Ch 10–12 entirely; the Dragon Book is far deeper than GATE needs — use it as a reference, not a read-through</td>
+          </tr>
+          <tr>
+            <td>Operating Systems</td>
+            <td class="book">Silberschatz &amp; Galvin — <em>Operating System Concepts</em></td>
+            <td>Processes, threads, IPC, synchronisation, deadlock, CPU scheduling, memory management, virtual memory, file systems, disk scheduling</td>
+            <td>Distributed systems, protection/security, case-study chapters</td>
+          </tr>
+          <tr>
+            <td>Databases</td>
+            <td class="book">Korth &amp; Sudarshan — <em>Database System Concepts</em>; Navathe for ER and normalisation</td>
+            <td>Relational model, algebra, tuple calculus, SQL, constraints, normal forms, indexing, transactions, concurrency control</td>
+            <td>Query optimisation internals, recovery beyond basics, data warehousing, NoSQL</td>
+          </tr>
+          <tr>
+            <td>Computer Networks</td>
+            <td class="book">Kurose &amp; Ross — <em>Computer Networking: A Top-Down Approach</em>; Tanenbaum for the data link layer</td>
+            <td>Layering, switching, delay/throughput, error detection &amp; CRC, MAC and Ethernet, DV/LS routing, IPv4, fragmentation, CIDR, NAT, TCP flow &amp; congestion, sockets, DNS, HTTP</td>
+            <td>Wireless, multimedia, network security chapters</td>
+          </tr>
+          <tr>
+            <td>General Aptitude</td>
+            <td class="book">R. S. Aggarwal — <em>Quantitative Aptitude</em> and <em>Verbal &amp; Non-Verbal Reasoning</em></td>
+            <td>Only the chapters GATE asks: ratios, percentages, time-work-speed, permutations, data interpretation, series, syllogisms, reading comprehension</td>
+            <td>Everything else in those very fat books</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The practice layer — this is where the marks come from</h3>
+    <ul>
+      <li><strong>Previous-year questions, 2010–2026</strong> — roughly 1,500 questions, topic-wise. This is non-negotiable and you will do three passes. GATE Overflow's free compiled book (with community solutions) is the standard source; Made Easy or Ace topic-wise workbooks work equally well on paper.</li>
+      <li><strong>One video course per weak subject only.</strong> Don't watch lectures for subjects you can read. Reserve video for whatever refuses to click — commonly TOC, compilers, or pipelining.</li>
+      <li><strong>One paid test series</strong>, booked by early November. Any of GO Classes, Made Easy, Ace, or Applied Course is fine — what matters is that it exists and you sit the tests on schedule.</li>
+      <li><strong>A standard formula/short-notes booklet</strong> you write yourself as you go. Not bought. Writing it is the revision.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span> Three phases</h2>
+    <div class="phases">
+      <div class="phase">
+        <div class="when">11 Aug → 29 Nov · 16 weeks</div>
+        <h4>Build</h4>
+        <p>One pass over all ten core subjects. Mathematics runs in parallel every single day rather than as its own block, and aptitude gets 30 minutes daily from day one. Every topic is closed with its previous-year questions the same day you learn it.</p>
+      </div>
+      <div class="phase">
+        <div class="when">30 Nov → 3 Jan · 5 weeks</div>
+        <h4>Consolidate</h4>
+        <p>Revision round one, subject by subject, against your own notes. Complete previous-year sets solved end to end under time. Subject-wise tests from your test series, two per week, each followed by a written error analysis.</p>
+      </div>
+      <div class="phase">
+        <div class="when">4 Jan → 5 Feb · 4.5 weeks</div>
+        <h4>Peak</h4>
+        <p>Twelve to fifteen full-length mocks at exactly the exam's time of day. Revision rounds two and three run off your notes and your error log only — no new material after 4 January, without exception.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span> Week by week</h2>
+    <p class="lede">Two tracks run every day of the build phase: a <strong>main subject</strong> (about 5 hours: concepts plus that topic's previous-year questions) and a <strong>parallel maths thread</strong> (about 1.5 hours). Aptitude takes 30 minutes at the end of the day, always. Sunday is half study, half revision of the previous seven days.</p>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr>
+            <th class="wk">Week</th>
+            <th>Main subject (≈5 h/day)</th>
+            <th>Parallel maths (≈1.5 h/day)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="wk"><b>W1</b>11–17 Aug</td><td>C programming: types, operators, control flow, functions, <strong>recursion</strong>, pointers, arrays-vs-pointers</td><td>Sets, relations, functions, equivalence &amp; partial orders</td></tr>
+          <tr><td class="wk"><b>W2</b>18–24 Aug</td><td>C: structures, unions, dynamic memory, storage classes. Data Structures: arrays, strings, stacks, queues, linked lists</td><td>Lattices; monoids and groups</td></tr>
+          <tr><td class="wk"><b>W3</b>25–31 Aug</td><td>Data Structures: binary trees, traversals, BSTs, AVL basics, binary heaps, graph representations</td><td>Propositional logic; first-order logic</td></tr>
+          <tr><td class="wk"><b>W4</b>1–7 Sep</td><td>Algorithms: asymptotic analysis, recurrence solving, all sorting algorithms, searching, hashing, divide &amp; conquer</td><td>Combinatorics: counting, pigeonhole, inclusion–exclusion</td></tr>
+          <tr><td class="wk"><b>W5</b>8–14 Sep</td><td>Algorithms: greedy, dynamic programming, graph traversals, MST (Prim/Kruskal), shortest paths (Dijkstra/Bellman-Ford/Floyd)</td><td>Recurrence relations; generating functions</td></tr>
+          <tr><td class="wk"><b>W6</b>15–21 Sep</td><td>Digital Logic: number systems, fixed &amp; floating point (IEEE 754), Boolean algebra, K-maps, Quine–McCluskey, combinational circuits</td><td>Graphs: connectivity, matching, colouring, planarity</td></tr>
+          <tr><td class="wk"><b>W7</b>22–28 Sep</td><td>Digital Logic: latches, flip-flops, counters, registers, sequential design <span class="pill p-lo">4 days</span> → COA: instruction sets, addressing modes, ALU design <span class="pill p-lo">3 days</span></td><td>Matrices, determinants, systems of linear equations, rank</td></tr>
+          <tr><td class="wk"><b>W8</b>29 Sep–5 Oct</td><td>COA: control unit design (hardwired and microprogrammed), memory interfacing, memory hierarchy, cache mapping and performance</td><td>Eigenvalues, eigenvectors, LU decomposition</td></tr>
+          <tr><td class="wk"><b>W9</b>6–12 Oct</td><td>COA: I/O interface, interrupts, DMA, instruction pipelining, all pipeline hazards <span class="pill p-lo">4 days</span> → OS: system calls, processes, threads, IPC <span class="pill p-lo">3 days</span></td><td>Calculus: limits, continuity, differentiability, maxima/minima, MVT</td></tr>
+          <tr><td class="wk"><b>W10</b>13–19 Oct</td><td>OS: synchronisation, semaphores, classic problems, deadlock (detection, avoidance, banker's), CPU and I/O scheduling</td><td>Calculus: definite and improper integration</td></tr>
+          <tr><td class="wk"><b>W11</b>20–26 Oct</td><td>OS: memory management, paging, segmentation, virtual memory, page replacement, TLBs, file systems, disk scheduling</td><td>Probability: conditional probability, Bayes, random variables</td></tr>
+          <tr><td class="wk"><b>W12</b>27 Oct–2 Nov</td><td>TOC: regular expressions, DFA/NFA, conversions, minimisation, regular languages, closure properties, pumping lemma, Myhill–Nerode</td><td>Distributions: uniform, normal, exponential, Poisson, binomial; mean, median, mode, standard deviation</td></tr>
+          <tr><td class="wk"><b>W13</b>3–9 Nov</td><td>TOC: CFGs, ambiguity, normal forms, PDAs, CFL closure properties, CFL pumping lemma. Compiler: lexical analysis, LL/LR parsing <span class="pill p-mid">shared theory</span></td><td>Full maths revision + all maths previous-year questions</td></tr>
+          <tr><td class="wk"><b>W14</b>10–16 Nov</td><td>TOC: Turing machines, decidability, undecidability, reductions, Rice's theorem <span class="pill p-lo">3 days</span> → Compiler: SDT, runtime environments, intermediate code, local optimisation, data flow analysis <span class="pill p-lo">4 days</span></td><td>Aptitude doubles to 1 h/day from here</td></tr>
+          <tr><td class="wk"><b>W15</b>17–23 Nov</td><td>Databases: ER model, relational model and algebra, tuple calculus, SQL, integrity constraints, functional dependencies, normal forms, file organisation, B and B+ trees, transactions, concurrency control</td><td>Aptitude 1 h/day</td></tr>
+          <tr><td class="wk"><b>W16</b>24–29 Nov</td><td>Networks: layering, circuit/packet/virtual-circuit switching, performance metrics, error detection &amp; CRC, MAC and Ethernet, distance-vector and link-state routing, IPv4, fragmentation, CIDR, NAT, TCP flow and congestion control, socket API, DNS, HTTP</td><td>Aptitude 1 h/day</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th class="wk">Week</th><th>Consolidate and peak</th><th>Tests</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="wk"><b>W17–18</b>30 Nov–13 Dec</td><td>Revision round 1: PDS, Algorithms, Discrete Maths, OS. Rebuild from your own notes, not the books. Every previous-year question of these four, solved under time</td><td>2 subject tests/week</td></tr>
+          <tr><td class="wk"><b>W19–20</b>14–27 Dec</td><td>Revision round 1: DL, COA, TOC, Compiler. Same method</td><td>2 subject tests/week</td></tr>
+          <tr><td class="wk"><b>W21</b>28 Dec–3 Jan</td><td>Revision round 1: DBMS, Networks, remaining maths. Full previous-year papers of 2024, 2025, 2026 solved end to end in one sitting each</td><td>3 full papers</td></tr>
+          <tr><td class="wk"><b>W22–24</b>4–24 Jan</td><td>Mock cycle. One full mock every alternate day, each followed by a 2–3 hour analysis longer than the test itself. Revision round 2 fills the gaps the mocks expose. <strong>No new material.</strong></td><td>~10 full mocks</td></tr>
+          <tr><td class="wk"><b>W25</b>25 Jan–1 Feb</td><td>Revision round 3: notes, formula sheet and error log only. Two final mocks. Standard results — cache formulas, TCP window arithmetic, closure-property tables, page-replacement rules — recited until automatic</td><td>2 full mocks</td></tr>
+          <tr><td class="wk"><b>W26</b>2–5 Feb</td><td>Taper. Light revision, sleep on exam-day schedule, no new problems after 3 February, admit card and logistics checked</td><td>none</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span> The daily shape</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Full-time · 8.5 h</h3>
+        <ul>
+          <li><strong>2.5 h</strong> — new concepts, main subject</li>
+          <li><strong>2.5 h</strong> — problems on that exact topic, previous-year questions first</li>
+          <li><strong>1.5 h</strong> — parallel maths thread</li>
+          <li><strong>1.0 h</strong> — spaced revision of the last 7 days' topics</li>
+          <li><strong>0.5 h</strong> — aptitude</li>
+          <li><strong>0.5 h</strong> — writing that day's entry in your own short notes</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Working or in final year · 4.5 h weekdays, 9 h weekends</h3>
+        <ul>
+          <li><strong>2 h</strong> before work — new concepts</li>
+          <li><strong>2 h</strong> after work — problems on the same topic</li>
+          <li><strong>0.5 h</strong> — aptitude and notes</li>
+          <li>Weekends carry the parallel maths thread and the weekly revision in one block</li>
+          <li>This track reaches ~42 h/week against the full-time ~60. Expect the build phase to run about 3 weeks longer, so cut it back: drop generating functions, Quine–McCluskey and runtime environments to a skim, and start Phase 2 on schedule regardless</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><p><strong>The one rule that decides the outcome.</strong> Never learn a topic without solving its previous-year questions the same day. A topic is not "done" when you understand it — it is done when you have solved every GATE question ever asked on it. This single habit is the difference between finishing the syllabus and scoring from it.</p></div>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span> Topics with thin previous-year coverage</h2>
+    <p class="lede">These sit in the syllabus but have few or no past questions to drill, so practice alone will not prepare you. Learn each properly the first time from the source named — an unexpected 2-mark question here is exactly the kind of thing that separates rank 300 from rank 120.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Topic</th><th>Where to learn it</th><th class="n">Risk</th></tr></thead>
+        <tbody>
+          <tr><td>Quine–McCluskey (tabular minimisation)</td><td>Mano Ch 3 supplement, or any standard digital-design text's tabular-method section</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>LU decomposition</td><td>Strang Ch 2.6 — know how to produce L and U by hand for a 3×3</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>Monoids and groups</td><td>Rosen is weak here; use a discrete-structures lecture series. Know closure, identity, inverse, subgroups, Lagrange's theorem</td><td class="n"><span class="pill p-hi">High</span></td></tr>
+          <tr><td>Generating functions</td><td>Rosen Ch 8.4 — solving recurrences and counting with them</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>Socket API</td><td>Kurose Ch 2.7 — the call sequence and which call blocks, for TCP and UDP</td><td class="n"><span class="pill p-hi">High</span></td></tr>
+          <tr><td>NAT</td><td>Kurose Ch 4.3 — translation-table mechanics, port rewriting</td><td class="n"><span class="pill p-mid">Medium</span></td></tr>
+          <tr><td>Median, mode, standard deviation</td><td>Any statistics primer; trivial to learn, easy to forget to</td><td class="n"><span class="pill p-lo">Low</span></td></tr>
+          <tr><td>Data flow analysis</td><td>Dragon Book Ch 9.2–9.4 — constant propagation, liveness, common subexpression elimination on a given flow graph</td><td class="n"><span class="pill p-hi">High</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span> Exam day</h2>
+    <p class="lede">65 questions, 100 marks, 180 minutes. Negative marking applies <strong>only to MCQs</strong> — one-third of a mark on 1-markers, two-thirds on 2-markers. NAT and MSQ questions carry no penalty.</p>
+    <ul>
+      <li><strong>Always attempt every NAT and MSQ.</strong> There is no cost. Leaving one blank is a pure donation.</li>
+      <li><strong>Three passes.</strong> First 45 minutes: every question you can finish in under 90 seconds, aptitude included. Next 90 minutes: the 2-mark questions you know a route through. Final 45: the rest, plus a re-check of every NAT you entered — a misread decimal place is the most common avoidable loss.</li>
+      <li><strong>Guess an MCQ only after eliminating two options.</strong> At 50/50 the expected value is positive; at a blind 25% it is not.</li>
+      <li><strong>Never spend more than 4 minutes on a single question</strong> on the first two passes. Mark it and move. The paper is won on the questions you can finish, not the one you refuse to abandon.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Plan written 11 August 2026 for the February 2027 paper. Exam dates are the expected first weekend of February — confirm against the official GATE 2027 notification when IIT Madras publishes it, and shift Phase 3 to match.
+  </footer>
+
+</div>
