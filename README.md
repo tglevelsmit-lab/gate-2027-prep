@@ -7,6 +7,8 @@ Target: **76 marks**, exam ~6 Feb 2027.
 - **`gate-2027-plan.html`** — the full plan, mark-by-mark targets, and book list.
 - **`error-log.csv`** — start it on day one. In January it replaces everything else.
 - **This file** — *what* to open and *when*.
+- **`DAY-WISE-PLAN.md`** — the same 477 days as a readable document, grouped by phase
+  and week. This is the one to open on a phone.
 - **`day-wise-plan.csv`** — every day from 11 Aug 2026 to 30 Nov 2027, one row each:
   today's topic, the maths thread, aptitude, and deadline flags. Open in a spreadsheet,
   filter to today. Regenerate with `build-day-wise-plan.py` if you fall behind and need
