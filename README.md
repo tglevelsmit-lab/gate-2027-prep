@@ -53,6 +53,7 @@ in `gate-2027-plan.html`.
 3-build-maths-W01-W12/     1.5 h/day — runs in parallel, never as its own block
 4-peak-full-papers/        locked until January
 5-reference-full-volumes/  the uncut originals, only if a split looks wrong
+6-IBPS-SO-IT-Officer/      do not open before 7 Feb 2027 - see its own README
 ```
 
 ### The textbooks
