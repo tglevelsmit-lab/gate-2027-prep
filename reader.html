@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Reader</title>
+<style>
+:root{--ground:#F6F8F7;--surface:#FFF;--alt:#EDF2F1;--line:#D3DDDB;--ink:#121A19;--muted:#57635F;
+--faint:#7C8783;--accent:#10555A;--accentSoft:#DCEBEA;
+--fB:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--fM:ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;
+--line:#2C3937;--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;--accent:#63C6C2;--accentSoft:#16302F}}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--fB);-webkit-font-smoothing:antialiased}
+header{position:sticky;top:0;z-index:9;background:var(--ground);border-bottom:1px solid var(--line);
+padding:.5rem .6rem;display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+button,a.btn{font:inherit;font-size:.85rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);
+border-radius:6px;padding:.45rem .6rem;min-height:2.6rem;min-width:2.6rem;cursor:pointer;text-decoration:none;
+display:inline-flex;align-items:center;justify-content:center}
+button:active,a.btn:active{background:var(--alt)}
+button:focus-visible,a.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a.btn.p{background:var(--accent);color:var(--ground);border-color:var(--accent);font-weight:600}
+#name{flex:1 1 8rem;font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+#pg{font-family:var(--fM);font-size:.8rem;color:var(--muted);white-space:nowrap}
+#pgin{width:3.4rem;font:inherit;font-family:var(--fM);font-size:.8rem;text-align:right;padding:.4rem;
+background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;min-height:2.6rem}
+main{padding:.6rem .4rem 3rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.pgw{position:relative;width:100%;max-width:60rem;background:var(--surface);border:1px solid var(--line);
+border-radius:4px;overflow:hidden}
+.pgw canvas{display:block;width:100%;height:auto}
+.ph{display:flex;align-items:center;justify-content:center;color:var(--faint);font-family:var(--fM);font-size:.75rem}
+#msg{padding:2.5rem 1.2rem;text-align:center;color:var(--muted);max-width:32rem;margin:0 auto;line-height:1.6}
+#msg code{background:var(--alt);padding:.1rem .3rem;border-radius:3px;font-size:.85em;word-break:break-all}
+</style></head><body>
+<header>
+  <a class="btn" id="lib" href="./index.html" title="Library">☰</a>
+  <span id="name">Loading…</span>
+  <button id="out" title="Zoom out">−</button><button id="in" title="Zoom in">+</button>
+  <input id="pgin" type="number" min="1" value="1" aria-label="Page number">
+  <span id="pg">/ –</span>
+  <a class="btn p" id="dl" download>Download</a>
+</header>
+<main id="main"><div id="msg">Loading…</div></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function(){
+var L=window['pdfjs-dist/build/pdf']||window.pdfjsLib;
+L.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+var q=new URLSearchParams(location.search), file=q.get("f")||"";
+var main=document.getElementById("main"), msg=document.getElementById("msg");
+if(!file){msg.innerHTML="No file given. Open a book from the <a href='./index.html'>library</a>.";return;}
+document.getElementById("name").textContent=file.split("/").pop().replace(/\.pdf$/,"");
+document.title=file.split("/").pop().replace(/\.pdf$/,"")+" — Reader";
+document.getElementById("dl").href=file;
+var KEY="pg:"+file, scale=parseFloat(localStorage.getItem("zoom")||"1.3")||1.3;
+var doc=null,N=0,wraps=[],rendered={},obs=null;
+function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function build(){
+  main.innerHTML="";wraps=[];rendered={};
+  for(var i=1;i<=N;i++){
+    var w=document.createElement("div");w.className="pgw";w.dataset.p=i;
+    w.style.aspectRatio=ratio;w.innerHTML='<div class="ph" style="height:100%">page '+i+'</div>';
+    main.appendChild(w);wraps.push(w);
+  }
+  if(obs)obs.disconnect();
+  obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var p=+e.target.dataset.p;
+      if(e.isIntersecting){draw(p);document.getElementById("pgin").value=p;store(KEY,p);}
+    });
+  },{root:null,rootMargin:"250% 0px",threshold:0});
+  wraps.forEach(function(w){obs.observe(w)});
+}
+var ratio="0.707";
+function draw(p){
+  if(rendered[p])return; rendered[p]=1;
+  doc.getPage(p).then(function(page){
+    var vp=page.getViewport({scale:scale*(window.devicePixelRatio||1)});
+    var c=document.createElement("canvas");c.width=vp.width;c.height=vp.height;
+    return page.render({canvasContext:c.getContext("2d"),viewport:vp}).promise.then(function(){
+      var w=wraps[p-1];if(!w)return;w.style.aspectRatio="";w.innerHTML="";w.appendChild(c);
+    });
+  }).catch(function(){rendered[p]=0});
+}
+L.getDocument(file).promise.then(function(d){
+  doc=d;N=d.numPages;document.getElementById("pg").textContent="/ "+N;
+  document.getElementById("pgin").max=N;
+  return d.getPage(1);
+}).then(function(p1){
+  var v=p1.getViewport({scale:1});ratio=(v.width/v.height).toFixed(4);
+  build();
+  var last=parseInt(get(KEY)||"1",10);
+  if(last>1&&last<=N)setTimeout(function(){wraps[last-1].scrollIntoView()},60);
+}).catch(function(e){
+  msg.innerHTML="Could not open <code>"+file+"</code>.<br><br>"+
+   "If you opened this file directly from your computer, browsers block local PDF loading. "+
+   "Use the GitHub Pages link instead, or run <code>python3 -m http.server</code> in the folder.<br><br>"+
+   "<a href='./index.html'>Back to library</a>";
+});
+function rezoom(d){scale=Math.min(4,Math.max(.5,scale+d));store("zoom",scale);
+  var cur=+document.getElementById("pgin").value||1;build();setTimeout(function(){
+    if(wraps[cur-1])wraps[cur-1].scrollIntoView()},50);}
+document.getElementById("in").onclick=function(){rezoom(.25)};
+document.getElementById("out").onclick=function(){rezoom(-.25)};
+document.getElementById("pgin").onchange=function(e){
+  var p=Math.max(1,Math.min(N,+e.target.value||1));if(wraps[p-1])wraps[p-1].scrollIntoView();};
+})();
+</script></body></html>
