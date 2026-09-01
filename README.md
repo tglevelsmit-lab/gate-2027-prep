@@ -8,25 +8,36 @@ Target: **76 marks**, exam ~6 Feb 2027.
 - **`error-log.csv`** — start it on day one. In January it replaces everything else.
 - **This file** — *what* to open and *when*.
 
-## Paid items and deadlines — the short list
+## Paid items and deadlines — the complete list, both exams
 
-Everything you *study* from is free and already here. Three things cost money:
+Everything you *study* from is free and already in these folders. Only five things cost
+money across GATE 2027 and IBPS SO 2027 — and two of them are deadlines that end the
+attempt entirely if missed.
 
-1. **GATE 2027 registration — the only genuinely unmissable item.** Roughly ₹1,800
-   (about ₹900 for SC/ST/PwD and female candidates). The window historically opens in
-   late August and closes end of September, with a late-fee extension into early
-   October. The official site `gate2027.iitm.ac.in` was **not live as of 12 Aug 2026** —
-   `gate.iitm.ac.in` redirects to it. **Check it weekly from now.** Miss this and the
-   other 25 weeks do not matter.
-2. **A test series — ₹1,000–3,000.** Book by early November, start subject tests in
-   December. Nothing free replaces it; see below.
-3. **Optional: one database textbook** (Korth or Navathe), if you'd rather not rely on
-   NPTEL for B+ trees, transactions and concurrency control. This is the only subject
-   where the free book genuinely falls short.
+| # | Item | Cost | Buy by | If you miss it |
+|---|---|---|---|---|
+| 1 | **GATE 2027 registration** | ~₹1,800 (~₹900 concession) | Window opens ~late Aug 2026, closes ~end Sep, late fee to early Oct | **Attempt over.** Nothing else matters |
+| 2 | **GATE test series** | ₹1,000–3,000 | Early Nov 2026 | No percentile signal, no unseen questions |
+| 3 | DBMS textbook — *optional* | ₹700–900 | Mid-Nov 2026 (W15) | Use NPTEL free instead |
+| 4 | **IBPS SO 2027 application** | ~₹850 (~₹175 concession) | Window ~Jun–Jul 2027 | **Attempt over** |
+| 5 | **Banking test series** | ₹500–1,500 | ~Apr 2027 | Prelims sectional speed untested |
 
-Nothing else is worth buying — no coaching, no video subscriptions, no printed
-previous-year books. Free equivalents for every other subject are already in the week
-folders and were checked against the syllabus.
+**Mandatory: ~₹2,650.** With both test series: **~₹4,150–7,150** spread over 18 months.
+
+Fees and windows shift year to year — confirm item 1 on `gate2027.iitm.ac.in` (not live
+as of 12 Aug 2026; `gate.iitm.ac.in` redirects there) and item 4 on `ibps.in` when the
+official notifications appear.
+
+### The two that actually decide things
+
+Items 1 and 4 are calendar events, not purchases. Neither this folder nor any amount of
+preparation can remind you. **Set a recurring reminder to check both sites weekly.**
+
+### Don't buy
+
+Coaching, video subscriptions, printed previous-year books, or any other textbook. Free
+equivalents for every subject in both exams are already downloaded here and were checked
+against the actual syllabus text.
 
 Every PDF below is cut from the GATE Overflow edition for GATE 2027 (all GATE CS
 questions, 1987 → GATE 2026), so a file named for a week contains exactly the
