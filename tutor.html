@@ -1,0 +1,220 @@
+<title>GATE Concept Tutor</title>
+<style>
+:root{--ground:#F6F8F7;--surface:#FFF;--alt:#EDF2F1;--line:#D3DDDB;--soft:#E4EBEA;--ink:#121A19;
+--muted:#57635F;--faint:#7C8783;--accent:#10555A;--accentSoft:#DCEBEA;--warn:#8A6210;--warnSoft:#F6EEDA;--crit:#9A302A;
+--fD:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+--fB:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--fM:ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;
+--line:#2C3937;--soft:#222D2C;--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;--accent:#63C6C2;--accentSoft:#16302F;
+--warn:#D9AC4E;--warnSoft:#2B2415;--crit:#E08078}}
+:root[data-theme=dark]{--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;--line:#2C3937;--soft:#222D2C;
+--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;--accent:#63C6C2;--accentSoft:#16302F;
+--warn:#D9AC4E;--warnSoft:#2B2415;--crit:#E08078}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--fB);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:44rem;margin:0 auto;padding:1.5rem 1rem 5rem;display:flex;flex-direction:column;gap:1rem}
+h1{font-family:var(--fD);font-size:1.55rem;font-weight:600;margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:.92rem;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font:inherit;font-size:.78rem;background:var(--surface);color:var(--muted);border:1px solid var(--line);
+border-radius:99px;padding:.4rem .7rem;cursor:pointer;min-height:2.2rem}
+.chip.on{background:var(--accentSoft);color:var(--accent);border-color:transparent}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+textarea{font:inherit;width:100%;min-height:6.5rem;background:var(--surface);color:var(--ink);
+border:1px solid var(--line);border-radius:8px;padding:.8rem;resize:vertical;line-height:1.5}
+textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bar{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+button.go{font:inherit;font-weight:600;background:var(--accent);color:var(--ground);border:1px solid var(--accent);
+border-radius:8px;padding:.7rem 1.2rem;cursor:pointer;min-height:2.9rem}
+button.alt{font:inherit;background:var(--surface);color:var(--ink);border:1px solid var(--line);
+border-radius:8px;padding:.7rem 1rem;cursor:pointer;min-height:2.9rem}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.turn{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;margin-top:.75rem}
+.turn.q{background:var(--alt);border-color:transparent;white-space:pre-wrap}
+.turn .who{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:700;margin-bottom:.5rem}
+.turn h3{font-size:.95rem;margin:1rem 0 .35rem;color:var(--accent)}
+.turn .body>h3:first-child{margin-top:0}
+.turn p{margin:.5rem 0}
+.turn ul,.turn ol{margin:.5rem 0;padding-left:1.2rem}
+.turn li{margin:.25rem 0}
+.turn code{font-family:var(--fM);font-size:.87em;background:var(--alt);padding:.1rem .32rem;border-radius:3px}
+.turn pre{background:var(--alt);padding:.75rem;border-radius:6px;overflow-x:auto;margin:.6rem 0}
+.turn pre code{background:none;padding:0;font-size:.82rem;line-height:1.45}
+.note{background:var(--warnSoft);border-left:3px solid var(--warn);border-radius:0 6px 6px 0;padding:.75rem .9rem;font-size:.86rem}
+.note b{color:var(--warn)}
+.err{background:var(--surface);border:1px solid var(--crit);border-left:3px solid var(--crit);
+border-radius:0 6px 6px 0;padding:.8rem .9rem;font-size:.9rem;margin-top:.75rem}
+footer{color:var(--faint);font-size:.78rem;border-top:1px solid var(--line);padding-top:.9rem}
+footer a{color:var(--accent)}
+</style>
+
+<div class="wrap">
+  <div>
+    <h1>Concept tutor</h1>
+    <p class="sub">Stuck on a topic, or on a past-year question? Paste it. Answers are pitched at GATE CS level, not textbook level.</p>
+  </div>
+
+  <div class="chips" id="chips"></div>
+  <textarea id="q" placeholder="e.g. Why does T(n) = 2T(n/2) + n come out as n log n by the Master Theorem?
+
+Or paste a whole GATE question and I'll work through it."></textarea>
+  <div class="bar">
+    <button class="go" id="ask">Explain</button>
+    <button class="alt" id="stop" hidden>Stop</button>
+    <button class="alt" id="reset" hidden>New question</button>
+  </div>
+
+  <div id="thread"></div>
+  <div id="status"></div>
+
+  <div class="note"><b>Check anything that has to be exact.</b> AI explanations are a fast way in, but they can be
+  subtly wrong on precise complexities, closure properties and edge cases &mdash; the very things GATE tests. When the
+  answer decides a mark, confirm it against your book or the discussion behind that question's QR code.</div>
+
+  <footer>
+    Runs on your Claude usage &mdash; it asks once before the first answer.
+    Material: <a href="https://tglevelsmit-lab.github.io/gate-2027-prep/">the library</a>.
+  </footer>
+</div>
+
+<script>
+var SUBJECTS=["Programming in C","Data Structures","Algorithms","Digital Logic","Computer Organisation",
+"Operating Systems","Theory of Computation","Compiler Design","Databases","Computer Networks",
+"Discrete Maths","Linear Algebra","Probability","Aptitude"];
+function $(id){return document.getElementById(id);}
+var subject=null, turns=[], busy=false, ctl=null, sampleFn=null;
+
+SUBJECTS.forEach(function(s){
+  var b=document.createElement("button");
+  b.className="chip"; b.type="button"; b.textContent=s;
+  b.onclick=function(){
+    subject=(subject===s)?null:s;
+    Array.prototype.forEach.call($("chips").children,function(c){
+      c.classList.toggle("on",c.textContent===subject);});
+    $("q").focus();
+  };
+  $("chips").appendChild(b);
+});
+
+function esc(s){return String(s).replace(/[&<>]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+
+function md(src){
+  var blocks=[];
+  var s=esc(src);
+  s=s.replace(/```(?:\w*)\n([\s\S]*?)```/g,function(m,c){blocks.push(c);return "@@B"+(blocks.length-1)+"@@";});
+  s=s.replace(/`([^`\n]+)`/g,"<code>$1</code>");
+  s=s.replace(/\*\*([^*\n]+)\*\*/g,"<strong>$1</strong>");
+  var out=[], list=null, i, m;
+  s.split("\n").forEach(function(line){
+    var t=line.trim();
+    if(!t){ if(list){out.push("</"+list+">");list=null;} return; }
+    if(/^#{2,4}\s+/.test(t)){
+      if(list){out.push("</"+list+">");list=null;}
+      out.push("<h3>"+t.replace(/^#{2,4}\s+/,"")+"</h3>"); return; }
+    if((m=t.match(/^[-*]\s+(.*)$/))){
+      if(list!=="ul"){ if(list)out.push("</"+list+">"); out.push("<ul>"); list="ul"; }
+      out.push("<li>"+m[1]+"</li>"); return; }
+    if((m=t.match(/^\d+[.)]\s+(.*)$/))){
+      if(list!=="ol"){ if(list)out.push("</"+list+">"); out.push("<ol>"); list="ol"; }
+      out.push("<li>"+m[1]+"</li>"); return; }
+    if(list){out.push("</"+list+">");list=null;}
+    out.push("<p>"+t+"</p>");
+  });
+  if(list)out.push("</"+list+">");
+  var html=out.join("");
+  for(i=0;i<blocks.length;i++){
+    html=html.split("@@B"+i+"@@").join("</p><pre><code>"+blocks[i].replace(/\n$/,"")+"</code></pre><p>");
+  }
+  return html.replace(/<p><\/p>/g,"");
+}
+
+function bubble(who,cls){
+  var d=document.createElement("div");
+  d.className="turn"+(cls?" "+cls:"");
+  var h=document.createElement("div"); h.className="who"; h.textContent=who;
+  var b=document.createElement("div"); b.className="body";
+  d.appendChild(h); d.appendChild(b); $("thread").appendChild(d);
+  return b;
+}
+
+function buildFirst(text){
+  return "You are helping a candidate prepare for GATE 2027 Computer Science, targeting a top-300 rank "+
+  "(about 76 marks out of 100). Explain at exactly the level GATE tests — precise and exam-focused, no filler.\n\n"+
+  (subject?("Subject: "+subject+"\n\n"):"")+
+  "Structure the answer with these headings:\n"+
+  "## The idea — two or three sentences in plain language.\n"+
+  "## Precisely — the exact definition, formula or statement GATE tests. State complexities and conditions exactly.\n"+
+  "## Worked example — one small concrete example, fully worked, with real numbers.\n"+
+  "## How GATE asks it — the question patterns, and the specific traps people fall for.\n\n"+
+  "If the text below is a question rather than a topic, solve it step by step, state the final answer clearly, "+
+  "then give the traps.\n\n"+
+  "Be concise — under 400 words unless the question needs working. Never approximate a complexity or a closure "+
+  "property. If something is genuinely disputed or ambiguous in the GATE context, say so instead of guessing.\n\n"+
+  "---\n"+text;
+}
+
+function setBusy(b){
+  busy=b; $("ask").disabled=b; $("stop").hidden=!b;
+  $("ask").textContent=b?"Thinking…":(turns.length?"Ask follow-up":"Explain");
+}
+
+function run(text){
+  if(busy||!text.trim())return;
+  if(!sampleFn){
+    $("status").innerHTML='<div class="err">The tutor needs the Claude artifact viewer. Open this page from your artifacts list.</div>';
+    return;
+  }
+  var isFirst=turns.length===0;
+  bubble(isFirst?"You":"Follow-up","q").textContent=text;
+  turns.push({role:"user",content:isFirst?buildFirst(text):text});
+  $("q").value=""; $("reset").hidden=false;
+  var body=bubble("Tutor");
+  body.innerHTML="<p>Thinking…</p>";
+  $("status").innerHTML=""; setBusy(true);
+  ctl=new AbortController();
+  var acc="";
+  sampleFn(turns,{cache:false,signal:ctl.signal,modelTier:"default",
+    onText:function(u){acc=u.text;body.innerHTML=md(u.text);}
+  }).then(function(r){
+    acc=(r&&r.text)||acc;
+    body.innerHTML=md(acc);
+    turns.push({role:"assistant",content:acc});
+    if(r&&r.truncated)$("status").innerHTML='<div class="note">That answer was cut short. Ask a narrower follow-up.</div>';
+  }).catch(function(e){
+    var c=e&&e.code, keep=e&&e.text;
+    if(keep){ acc=keep; body.innerHTML=md(keep); turns.push({role:"assistant",content:keep}); }
+    else { body.parentNode.remove(); turns.pop(); }
+    var M={cancelled:"Stopped.",
+      rate_limited:"Too many requests just now — wait a minute, then try again.",
+      not_granted:"Access was declined, so the tutor cannot answer.",
+      sampling_disabled:"AI answers are turned off for this view.",
+      capability_disabled:"AI answers are turned off for this view.",
+      capability_removed:"AI answers are no longer available on this page.",
+      session_expired:"Your session expired — reload the page.",
+      prompt_too_large:"That was too long. Paste just the question, not the whole page.",
+      refused:"That request was refused. Try rephrasing it as a concepts question.",
+      empty_completion:"That came back empty. Try again.",
+      invalid_request:"Something about that request was malformed. Try again."};
+    if(c!=="cancelled"||!keep)
+      $("status").innerHTML='<div class="err">'+esc(M[c]||"Something went wrong. Try again in a moment.")+"</div>";
+  }).then(function(){ setBusy(false); ctl=null; });
+}
+
+$("ask").onclick=function(){run($("q").value);};
+$("stop").onclick=function(){if(ctl)ctl.abort();};
+$("reset").onclick=function(){
+  turns=[]; $("thread").innerHTML=""; $("status").innerHTML="";
+  $("reset").hidden=true; $("q").value=""; setBusy(false);
+};
+$("q").addEventListener("keydown",function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key==="Enter")run($("q").value);
+});
+
+claude.use("sample").then(function(fn){
+  sampleFn=fn;
+  if(!fn)$("status").innerHTML='<div class="err">The tutor needs the Claude artifact viewer to answer. '+
+    'Open this page from your artifacts list.</div>';
+}).catch(function(){});
+</script>
