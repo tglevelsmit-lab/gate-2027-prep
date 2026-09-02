@@ -99,6 +99,19 @@ free and legally so — author-distributed or openly licensed (CC BY / CC BY-SA 
 | W09–10 Calculus | *OpenStax Calculus Volume 1* | CC BY-NC-SA |
 | W11–12 Probability | *Introduction to Probability* — Grinstead & Snell | GFDL |
 
+### Second opinions — extra books per subject
+
+When the main book for a week doesn't click, open the `--BOOK2-` file in the same folder.
+Same syllabus, different author, different way in.
+
+| Week | Extra book | Why it earns a place |
+|---|---|---|
+| W01 Programming in C | *Beej's Guide to C* | Far gentler than Modern C. 501 mentions of pointers, worked slowly. Note: it has no recursion chapter — use Modern C for that |
+| W12–14 Theory of Computation | *Models of Computation* — John Savage (Brown) | 698 pages, much deeper than Maheshwari & Smid where you need rigour |
+| W13–14 Compiler Design | *Compiler Construction* — Niklaus Wirth (ETH) | 108 pages, the whole pipeline end to end. Read it when Mogensen feels fragmented |
+| W15 Databases | *Foundations of Databases* — Abiteboul, Hull, Vianu | The definitive treatment of relational algebra and tuple calculus, both GATE staples |
+| W16 Computer Networks | *Beej's Guide to Network Programming* | **Closes the socket API gap** — the call sequence, which calls block, TCP and UDP |
+
 ### Four places these free books don't reach
 
 Verified by searching the actual text, not assumed. Each has a free fix — use NPTEL
