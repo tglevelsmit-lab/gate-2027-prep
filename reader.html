@@ -25,10 +25,15 @@ main{padding:.6rem .4rem 6rem;display:flex;flex-direction:column;align-items:cen
 .pgw{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
 .pgw canvas{display:block}
 .ph{display:flex;align-items:center;justify-content:center;color:var(--faint);font-family:var(--fM);font-size:.75rem;height:100%}
-.textLayer{position:absolute;left:0;top:0;overflow:hidden;line-height:1;opacity:1;z-index:2}
-.textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0% 0%}
+.textLayer{position:absolute;left:0;top:0;overflow:hidden;line-height:1;opacity:1;z-index:2;-webkit-user-select:text;user-select:text}
+.textLayer span,.textLayer br{color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0% 0%;-webkit-user-select:text;user-select:text}
 .textLayer ::selection{background:rgba(16,85,90,.35)}
 @media (prefers-color-scheme:dark){.textLayer ::selection{background:rgba(99,198,194,.4)}}
+#snipBox{position:absolute;border:2px solid var(--accent);background:rgba(16,85,90,.16);pointer-events:none;z-index:6}
+body.snipping .textLayer{pointer-events:none}
+body.snipping .pgw{cursor:crosshair;touch-action:none}
+#snipHint{position:fixed;left:0;right:0;bottom:0;z-index:35;background:var(--accent);color:var(--ground);padding:.75rem;text-align:center;font-size:.88rem;font-weight:600}
+#sheetBody img.snap{max-width:100%;border:1px solid var(--line);border-radius:6px;margin-bottom:.9rem;display:block}
 #msg{padding:2.5rem 1.2rem;text-align:center;color:var(--muted);max-width:32rem;margin:0 auto;line-height:1.6}
 #msg code{background:var(--alt);padding:.1rem .3rem;border-radius:3px;font-size:.85em;word-break:break-all}
 #selbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);
@@ -63,9 +68,12 @@ border:1px solid var(--line);border-radius:8px;padding:.6rem;min-height:2.7rem}
   <button id="out" title="Zoom out">&minus;</button><button id="in" title="Zoom in">+</button>
   <input id="pgin" type="number" min="1" value="1" aria-label="Page number">
   <span id="pg">/ &ndash;</span>
+  <button id="snipBtn" title="Snip a region to explain">Snip</button>
   <a class="btn p" id="dl" download>Download</a>
 </header>
 <main id="main"><div id="msg">Loading…</div></main>
+
+<div id="snipHint" hidden>Drag a box around what you want explained</div>
 
 <div id="selbar" hidden>
   <span class="snip" id="snip"></span>
@@ -269,5 +277,94 @@ $("fuGo").onclick=function(){
   send();
 };
 $("fu").addEventListener("keydown",function(e){if(e.key==="Enter")$("fuGo").click();});
+
+/* ---------- snip: crop a region and explain the image ---------- */
+var snipOn=false,sBox=null,sWrap=null,sStart=null;
+function setSnip(on){
+  snipOn=on;
+  document.body.classList.toggle("snipping",on);
+  $("snipHint").hidden=!on;
+  $("snipBtn").classList.toggle("p",on);
+  if(!on)killBox();
+}
+function killBox(){ if(sBox&&sBox.parentNode)sBox.parentNode.removeChild(sBox); sBox=null;sWrap=null;sStart=null; }
+function wrapOf(el){ while(el&&el!==document){ if(el.classList&&el.classList.contains("pgw"))return el; el=el.parentNode; } return null; }
+
+main.addEventListener("pointerdown",function(e){
+  if(!snipOn)return;
+  var wrap=wrapOf(e.target); if(!wrap||!wrap.querySelector("canvas"))return;
+  e.preventDefault();
+  sWrap=wrap;
+  var r=wrap.getBoundingClientRect();
+  sStart={x:e.clientX-r.left,y:e.clientY-r.top};
+  sBox=document.createElement("div"); sBox.id="snipBox";
+  sBox.style.left=sStart.x+"px"; sBox.style.top=sStart.y+"px";
+  sBox.style.width="0px"; sBox.style.height="0px";
+  wrap.appendChild(sBox);
+  try{wrap.setPointerCapture(e.pointerId);}catch(err){}
+},{passive:false});
+
+main.addEventListener("pointermove",function(e){
+  if(!snipOn||!sBox||!sWrap)return;
+  e.preventDefault();
+  var r=sWrap.getBoundingClientRect();
+  var x=Math.max(0,Math.min(r.width,e.clientX-r.left));
+  var y=Math.max(0,Math.min(r.height,e.clientY-r.top));
+  sBox.style.left=Math.min(x,sStart.x)+"px";
+  sBox.style.top=Math.min(y,sStart.y)+"px";
+  sBox.style.width=Math.abs(x-sStart.x)+"px";
+  sBox.style.height=Math.abs(y-sStart.y)+"px";
+},{passive:false});
+
+function endSnip(e){
+  if(!snipOn||!sBox||!sWrap)return;
+  var bb=sBox.getBoundingClientRect(), wb=sWrap.getBoundingClientRect();
+  var x=bb.left-wb.left, y=bb.top-wb.top, w=bb.width, h=bb.height, wrap=sWrap;
+  killBox(); setSnip(false);
+  if(w<18||h<18)return;
+  cropAndAsk(wrap,x,y,w,h);
+}
+main.addEventListener("pointerup",endSnip);
+main.addEventListener("pointercancel",function(){killBox();setSnip(false);});
+
+function cropAndAsk(wrap,x,y,w,h){
+  var c=wrap.querySelector("canvas"); if(!c)return;
+  var kx=c.width/parseFloat(c.style.width||c.width);
+  var ky=c.height/parseFloat(c.style.height||c.height);
+  var bx=Math.max(0,Math.round(x*kx)), by=Math.max(0,Math.round(y*ky));
+  var bw=Math.min(c.width-bx,Math.round(w*kx)), bh=Math.min(c.height-by,Math.round(h*ky));
+  if(bw<4||bh<4)return;
+  var sc=Math.min(1,1500/Math.max(bw,bh));
+  var out=document.createElement("canvas");
+  out.width=Math.max(1,Math.round(bw*sc)); out.height=Math.max(1,Math.round(bh*sc));
+  var g=out.getContext("2d");
+  g.fillStyle="#ffffff"; g.fillRect(0,0,out.width,out.height);
+  g.drawImage(c,bx,by,bw,bh,0,0,out.width,out.height);
+  var url;
+  try{ url=out.toDataURL("image/png"); }catch(err){
+    $("sheet").hidden=false;
+    $("sheetBody").innerHTML='<div class="err">Could not read that region of the page.</div>';
+    return;
+  }
+  askImage(url);
+}
+
+function askImage(dataUrl){
+  $("selbar").hidden=true; $("sheet").hidden=false;
+  $("sheetBody").innerHTML='<img class="snap" src="'+dataUrl+'" alt="snipped region">'+
+    '<div class="ans" id="ans"><p>Reading the image…</p></div>';
+  $("fuBar").hidden=true;
+  if(!GateAI.hasKey()){
+    $("ans").innerHTML='<p>To explain snips here, set up a free Google AI Studio key once — '+
+      'it takes two minutes and stays on this device.</p><p><a class="btn p" href="./tutor.html">Set up the key</a></p>';
+    return;
+  }
+  turns=[{role:"user",parts:[
+    {text:GateAI.promptImage("in "+short)},
+    {inline_data:{mime_type:"image/png",data:dataUrl.split(",")[1]}}
+  ]}];
+  send();
+}
+$("snipBtn").onclick=function(){setSnip(!snipOn);};
 })();
 </script></body></html>

@@ -68,6 +68,23 @@
       "---\n" + passage;
   }
 
+  /* Prompt for a cropped screenshot of a page. */
+  function promptImage(ctx) {
+    return "You are helping a candidate prepare for GATE 2027 Computer Science, targeting a top-300 rank " +
+      "(about 76 marks out of 100). The image is a region they cropped while reading" +
+      (ctx ? " " + ctx : "") + ". They did not understand it.\n\n" +
+      "First read the image carefully, including any formula, diagram, table or code. Then explain it at exactly " +
+      "the level GATE tests - precise and exam-focused, no filler.\n\n" +
+      "Structure the answer with these headings:\n" +
+      "## What this shows - what is in the image, in two or three sentences.\n" +
+      "## Precisely - the exact definition, formula or result behind it. State complexities and conditions exactly.\n" +
+      "## Worked example - one small concrete example with real numbers.\n" +
+      "## How GATE asks it - the question patterns, and the traps people fall for.\n\n" +
+      "If the image is a question, solve it step by step and state the final answer clearly.\n\n" +
+      "Be concise - under 350 words. Never approximate a complexity or a closure property. If the image is " +
+      "cut off or unreadable, say exactly what is missing instead of guessing.";
+  }
+
   function pickModel(models) {
     var best = null, bestScore = -1;
     (models || []).forEach(function (m) {
@@ -158,6 +175,6 @@
 
   w.GateAI = {
     hasKey: function () { return !!LS("gkey"); },
-    md: md, esc: esc, ask: ask, errMsg: errMsg, promptPassage: promptPassage
+    md: md, esc: esc, ask: ask, errMsg: errMsg, promptPassage: promptPassage, promptImage: promptImage
   };
 })(window);
