@@ -84,7 +84,8 @@ free and legally so — author-distributed or openly licensed (CC BY / CC BY-SA 
 |---|---|---|
 | W01 Programming in C | *Modern C* — Jens Gustedt | INRIA, free |
 | W02–03 Data Structures | *Open Data Structures* — Pat Morin | CC BY |
-| W04–05 Algorithms | *Algorithms* — Jeff Erickson | CC BY (10 chapters; max-flow and NP-hardness omitted, not in syllabus) |
+| W04 Sorting, searching, hashing | *Open Data Structures* — Pat Morin (ch 5, 10, 11) | CC BY |
+| W05 Recurrences, greedy, DP, graphs | *Algorithms* — Jeff Erickson | CC BY (10 chapters; max-flow and NP-hardness omitted) |
 | W06–07 Digital Logic | *Computer Organization and Design Fundamentals* — David Tarnoff | ETSU OER |
 | W07–09 Computer Organisation | same Tarnoff book | ETSU OER |
 | W09–11 Operating Systems | *OSTEP* — Arpaci-Dusseau | free, 68 chapters merged |
@@ -108,9 +109,12 @@ Verified by searching the actual text, not assumed. Each has a free fix — use 
 2. **DBMS indexing, transactions, concurrency control** — the Watt book covers ER,
    normalisation and SQL, but has no B/B+ trees and no serialisability. That is close to
    half of GATE's database marks. Plan on NPTEL's DBMS course for W15.
-3. **Sorting details** — Erickson covers mergesort, quicksort and heaps, but not counting
-   or radix sort, and is light on stability and exact comparison counts. The key-concepts
-   section in the questions file fills most of this.
+3. **Sorting, hashing and the Master Theorem** — Erickson has *no* counting sort, *no*
+   heapsort and barely touches hash tables, so W04 now carries two books: open
+   `--BOOK-1-sorting-hashing-OpenDataStructures` for weeks 4's sorting and hashing, and
+   `--BOOK-2-...-Erickson` for week 5's recurrences, greedy, DP and graphs. Neither names
+   the **Master Theorem** — that is in the key-concepts section at the front of
+   `W04-W05-Algorithms.pdf`, which is where you should start the week.
 4. **Improper integrals** — OpenStax Volume 1 stops before them (they're in Volume 2).
    Minor; GATE rarely goes past convergence.
 
