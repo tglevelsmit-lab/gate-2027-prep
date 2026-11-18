@@ -7,10 +7,10 @@ watch the RRB website weekly.
 This folder has everything needed to prepare: the plan, the books, and a practice
 engine that generates unlimited questions and full mocks.
 
-> The exam pattern below comes from secondary sites summarising CEN 08/2026, which
-> disagree with each other in places. Before relying on it, check it against the
-> notice on your RRB's website or `rrbapply.gov.in`. Fix this file wherever the two
-> differ.
+> **Verified against the official CEN 08/2026** (paragraph numbers given in brackets).
+> Official sources: the notice and every update are at <https://rrb.indianrailways.gov.in>
+> (navigate to your RRB's page). The application, admit cards and refund status are at <https://www.rrbapply.gov.in>.
+> Check both weekly for corrigenda (para 24.7).
 
 ---
 
@@ -18,9 +18,10 @@ engine that generates unlimited questions and full mocks.
 
 | Stage | What it is | Counts for |
 |---|---|---|
-| **CBT** | Single stage. 100 questions, 100 marks, **120 minutes**, **−⅓ per wrong answer** | 70% of final merit |
-| **CBAT** | Computer-based aptitude (psychometric) test. Top **8× vacancies** from the CBT are called, per RRB and community | 30% of final merit, **and you must qualify every test in it** |
-| DV | Document verification | Pass/fail |
+| **CBT** | Single stage. 100 questions, 100 marks, **120 minutes**, **−⅓ per wrong answer**, normalised across shifts (15.1) | 70% of final merit |
+| CBT minimum | **UR & EWS 40%**, OBC-NCL 30%, SC 30%, ST 25% (15.1). OBC creamy layer counts as UR (11.3) | Eligibility floor only. Rank decides |
+| **CBAT** | Psychometric test batteries, English/Hindi only, **no negative marking**. **8× vacancies** called, per RRB and per community (15.2) | 30% of final merit. **Minimum T-score 42 in every battery, with no relaxation for any category** |
+| DV + Medical | Called 1:1 against vacancies, on CBT 70% + CBAT 30% merit (3.4b, 15.3). A tie goes to the older candidate | Pass/fail |
 | **Medical** | Standard **A-2** | Pass/fail. **Read section 6 now** |
 
 ### CBT sections
@@ -32,7 +33,11 @@ engine that generates unlimited questions and full mocks.
 | Logical Capability & Reading Comprehension | 20 | Syllogism, binary logic, clocks, calendars, assumptions, blood relations, puzzles, **English RC passages** |
 | Mental Reasoning | 20 | Analogy, series, coding-decoding, ranking, arrangements |
 
-**No General Awareness section** is listed. If the official notice has one, see section 8.
+**Confirmed: there is no General Awareness section** (15.1). The section split is "indicative" and
+may vary slightly. The notice groups the first two rows as "Basic Science, Mathematical and
+Analytical Capability (60)", and RC questions test main idea, supporting idea, application, logical structure and style.
+The topic list is "illustrative, not exhaustive". CBT questions appear in your chosen
+language and in English (16.4d).
 
 ---
 
@@ -43,7 +48,8 @@ engine that generates unlimited questions and full mocks.
 - The content is about Class 10 level. If you can do GATE General Aptitude, you can do most of it.
 - **Speed is the real test.** You get 1.2 minutes per question, with negative marking.
 - Expect to need **75–85+ out of 100** for the CBAT shortlist. That is an estimate:
-  there is no past cutoff for this pattern.
+  there is no past cutoff for this pattern. Annexure-B of the notice lists the exact vacancies
+  per RRB, zone and community, which sets how many people are called to the CBAT (8× those vacancies).
 - Your gaps:
   1. **Basic Science**, which is Class 9–10 physics.
   2. **The CBAT format.**
@@ -182,35 +188,57 @@ practice link if RRB publishes one, and the mock series' CBAT section.
 
 ---
 
-## 6. Medical standard A-2: check before you invest months
+## 6. Medical standard A-2 (para 6, Annexures VI, VI-B)
 
-The secondary sources describe A-2 as:
-
-- Distance vision **6/9, 6/9 without glasses**.
+- Distance vision **6/9, 6/9 without glasses**, with no fogging test.
 - Near vision **Sn 0.6, 0.6 without glasses**.
-- Colour, binocular and night vision tests must be passed.
+- You must pass the **colour vision (Ishihara), binocular, night and myopic vision** tests.
+- **LASIK or any other refractive surgery makes you ineligible** for Station Master. A
+  self-declaration (Annexure VI-B) is taken at DV.
+- **A medical failure means no alternate post is offered** (6.2). One paid medical
+  appeal is allowed (6.3).
 
-If you wear spectacles or have any doubt about colour vision, **get an eye test now**. Confirm
-the exact standard in the notice.
+### Vision certificate: needed to sit the CBAT
+
+You must bring an **eye specialist's certificate in the Annexure VI format, in original, on
+CBAT day. Without it you are not allowed into the CBAT** (6.1, 15.2). The form needs:
+- a self-attested photo **no more than one month old**;
+- your signature;
+- the specialist's signature, name, registration number and seal.
+
+What to do:
+1. **Now:** get a full eye check (visual acuity without glasses, plus Ishihara colour
+   plates) to find out whether you meet A-2. A medical failure is the one problem
+   preparation can't fix.
+2. **After the CBT result, before the CBAT:** get Annexure VI filled and signed, with a fresh photo.
 
 ---
 
-## 7. Admin
+## 7. Admin (all from the notice)
 
-- **Modification window**, as the sources give it: 28 Nov–7 Dec 2026. Corrections are only possible then.
-- **Fee refund.** In past RRB recruitments, most of the fee (₹400 less bank charges)
-  was refunded to candidates who **sat the CBT**. Check the notice's fee paragraph.
-- **City slip and admit card** come about 10 days before the exam. Check weekly once the
-  CBT date is announced.
-- **DV documents.** Collect them now: 10th certificate (for date of birth), degree
-  certificate and marksheets, community certificate in the central-government format
-  and in date, ID proof, and photographs that match the application.
-
----
-
-## 8. If the official notice says something different
-
-- **General Awareness is included:** add 30 min a day of current affairs plus static GK
-  (polity, history, geography, Indian Railways). Take the time from the Reasoning block.
-- **The CBT is split into two stages:** treat stage 1 as above, and plan stage 2 once
-  its syllabus is known.
+- **Modification window: 28 Nov–7 Dec 2026, ₹250 per change** (19). The details from "Create an
+  Account" and the chosen RRB can't be changed.
+- **Fee refund: ₹400 of ₹500, less bank charges, if you sit the CBT** (10). It is paid
+  only to your **Aadhaar-seeded bank account** (10.3), so keep that account active.
+- **City intimation** comes about 10 days before the exam, and the **e-call letter** about 4 days before (21.2).
+  Download them only from the official RRB website. Nothing comes by post.
+- **Bring to every stage:**
+  - the e-call letter;
+  - an original photo ID;
+  - a colour passport photo **no older than 2 months** (21.6–21.7).
+  No pen, watch or anything else is allowed; a pen is provided (3.1).
+- **Signature:** use running handwriting, **never capitals**, identical at the CBT, CBAT, DV and medical
+  (4.12). You will hand-write a self-declaration paragraph at the venue (21.8), so
+  practise signing the same way every time.
+- **Name and date of birth** must match your 10th certificate exactly (4.8, 8.6).
+- **DV originals plus two self-attested photocopy sets** (22.1). Upload your photo and
+  signature at <https://oirms-ir.gov.in/rrbdv/> before the DV date (22.2).
+  - 10th certificate (date of birth).
+  - Degree certificate and marksheets, dated. If the degree certificate is dated after 25.11.2026,
+    bring the marksheets with their result-declaration dates.
+  - ID and address proof matching the **present address** in the application (16.8).
+  - Community certificate in the prescribed format, only if claiming reservation.
+- **CBAT information:** RDSO publishes official guidance at
+  <https://rdso.indianrailways.gov.in>, under Verticals → Traffic and Psychology →
+  Psychology – Candidate's Corner (15.2). **Read it before the CBAT.**
+- **Beware of touts.** RRB appoints no agents or coaching centres (23.3).

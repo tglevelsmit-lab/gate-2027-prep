@@ -107,7 +107,7 @@ function home() {
   RRB.TOPICS.forEach(t => (groups[t.sec + "|" + t.group] = groups[t.sec + "|" + t.group] || []).push(t));
   app.innerHTML = `
   <h1>Station Master practice</h1>
-  <p class="sub">Every question is generated fresh, with the answer computed by code. Pattern as reported for CEN 08/2026: 100 questions, 120 minutes, −⅓ per wrong answer.</p>
+  <p class="sub">Every question is generated fresh, with the answer computed by code. Pattern per official CEN 08/2026 (para 15.1): 100 questions, 120 minutes, −⅓ per wrong answer.</p>
   <div class="nav"><a href="./index.html">Library</a><a href="./rrb-syllabus.html">Syllabus tracker</a><a href="./7-RRB-Station-Master/README.md">Station Master plan</a><a href="./tutor.html">Ask the tutor</a></div>
   <h2>Tests</h2>
   <div class="modes">
@@ -121,7 +121,7 @@ function home() {
   ${hist.length ? `<table class="res"><tr><th>When</th><th>Test</th><th>Score</th><th>Accuracy</th></tr>${hist.slice(-15).reverse().map(h => `<tr><td>${esc(h.when)}</td><td>${esc(h.name)}</td><td>${h.score.toFixed(2)} / ${h.max}</td><td>${h.att ? Math.round(h.cor / h.att * 100) : 0}%</td></tr>`).join("")}</table>
    <p class="meta">Stored only in this browser. Copy every wrong answer into error-log.csv.</p>` : `<p class="sub">No tests yet. Start with one topic drill per syllabus area, then a sectional, then a full mock.</p>`}
   <div class="note"><b>How to use this:</b> drills build method; sectionals build speed; take one full mock every week from the time the CBT date is announced. Skip a question you can't do in 90 seconds — a wrong answer costs a third of a mark.</div>
-  <footer>Generated questions, original passages. Not affiliated with any Railway Recruitment Board. Check the pattern against the official CEN.</footer>`;
+  <footer>Generated questions, original passages. Not affiliated with any Railway Recruitment Board.</footer>`;
   app.querySelectorAll("[data-m=mock]").forEach(b => b.onclick = () => start("mock", "Full mock", RRB.mock(), 120 * 60));
   app.querySelectorAll("[data-sec]").forEach(b => b.onclick = () => { const s = SEC[+b.dataset.sec], n = SEC_N[s]; start("section", s + " — sectional", s === SEC[0] ? RRB.sectionSet(s, 18, { only: t => t.group === "Mathematics" }).concat(RRB.sectionSet(s, 12, { only: t => t.group === "Basic science" })) : RRB.sectionSet(s, n), Math.round(n * 1.2 * 60)); });
   app.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { const t = RRB.TOPICS.find(x => x.id === b.dataset.t); start("drill", t.name, RRB.drill(t.id, 10), 0); });
