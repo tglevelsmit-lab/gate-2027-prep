@@ -1,5 +1,10 @@
 # GATE 2027 CS — what to open, and when
 
+> **Current main focus: RRB Station Master (CEN 08/2026).** Start with
+> `7-RRB-Station-Master/README.md` for the week-by-week plan, and use `rrb-practice.html`
+> every day. GATE 2027 is **not** being attempted (not registered). Everything below is the
+> original GATE / IBPS plan, kept for reference and for a later cycle.
+
 Target: **76 marks**, exam ~6 Feb 2027.
 
 - **`HOW-TO-STUDY.md`** — *how* to work: the daily loop, the error log, how to revise, how
@@ -16,9 +21,9 @@ Target: **76 marks**, exam ~6 Feb 2027.
 
 ## Paid items and deadlines — the complete list, both exams
 
-Everything you *study* from is free and already in these folders. Only five things cost
-money across GATE 2027 and IBPS SO 2027 — and two of them are deadlines that end the
-attempt entirely if missed.
+Everything you *study* from is free and already in these folders. Only seven things cost
+money across GATE 2027, IBPS SO 2027 and RRB Station Master. Two of them are deadlines
+that end the attempt entirely if missed.
 
 | # | Item | Cost | Buy by | If you miss it |
 |---|---|---|---|---|
@@ -27,8 +32,10 @@ attempt entirely if missed.
 | 3 | DBMS textbook — *optional* | ₹700–900 | Mid-Nov 2026 (W15) | Use NPTEL free instead |
 | 4 | **IBPS SO 2027 application** | ~₹850 (~₹175 concession) | Window ~Jun–Jul 2027 | **Attempt over** |
 | 5 | **Banking test series** | ₹500–1,500 | ~Apr 2027 | Prelims sectional speed untested |
+| 6 | RRB Station Master application (CEN 08/2026) | ₹500 | **Done.** ~₹400 refunded if you sit the CBT | — |
+| 7 | **Station Master mock series** | ₹300–600 | When the CBT date is announced | No new-pattern or CBAT practice |
 
-**Mandatory: ~₹2,650.** With both test series: **~₹4,150–7,150** spread over 18 months.
+**Mandatory: ~₹3,150** (Station Master fee already paid). With all three test series: **~₹4,950–8,250** spread over 18 months.
 
 Fees and windows shift year to year — confirm item 1 on `gate2027.iitm.ac.in` (not live
 as of 12 Aug 2026; `gate.iitm.ac.in` redirects there) and item 4 on `ibps.in` when the
@@ -71,6 +78,8 @@ in `gate-2027-plan.html`.
 4-peak-full-papers/        locked until January
 5-reference-full-volumes/  the uncut originals, only if a split looks wrong
 6-IBPS-SO-IT-Officer/      do not open before 7 Feb 2027 - see its own README
+7-RRB-Station-Master/      MAIN FOCUS - plan, syllabus-cut books, see its README
+rrb-practice.html          RRB drills, sectionals, full mocks, CBAT trainer
 ```
 
 ### The textbooks

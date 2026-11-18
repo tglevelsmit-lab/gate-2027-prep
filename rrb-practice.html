@@ -1,0 +1,299 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Station Master Practice</title>
+<style>
+:root{--ground:#F6F8F7;--surface:#FFF;--alt:#EDF2F1;--line:#D3DDDB;--ink:#121A19;
+--muted:#57635F;--faint:#7C8783;--accent:#10555A;--accentSoft:#DCEBEA;--good:#1E6B3A;--goodSoft:#DDEFE3;
+--bad:#9A302A;--badSoft:#F6E1DF;--warn:#8A6210;--warnSoft:#F6EEDA;
+--c0:#10555A;--c1:#C2762B;--c2:#6A5A9E;--c3:#3B8B5A;--c4:#B34A6B;--c5:#7C8783;
+--fD:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+--fB:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--fM:ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;
+--line:#2C3937;--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;--accent:#63C6C2;--accentSoft:#16302F;
+--good:#6CC48D;--goodSoft:#16301F;--bad:#E08078;--badSoft:#3A1C1A;--warn:#D9AC4E;--warnSoft:#2B2415;
+--c0:#63C6C2;--c1:#E0A060;--c2:#A898DA;--c3:#6CC48D;--c4:#E07C9C;--c5:#9AA8A4}}
+:root[data-theme=dark]{--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;--line:#2C3937;--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;
+--accent:#63C6C2;--accentSoft:#16302F;--good:#6CC48D;--goodSoft:#16301F;--bad:#E08078;--badSoft:#3A1C1A;--warn:#D9AC4E;--warnSoft:#2B2415;
+--c0:#63C6C2;--c1:#E0A060;--c2:#A898DA;--c3:#6CC48D;--c4:#E07C9C;--c5:#9AA8A4}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--fB);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:46rem;margin:0 auto;padding:1.3rem 1rem 5rem}
+h1{font-family:var(--fD);font-size:1.6rem;font-weight:600;margin:0 0 .2rem;letter-spacing:-.01em}
+h2{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:700;margin:1.8rem 0 .7rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+h3{font-size:.95rem;margin:1rem 0 .4rem}
+.sub{color:var(--muted);font-size:.92rem;margin:0 0 1rem}
+a{color:var(--accent)}
+.nav{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 .2rem}
+.nav a{font-size:.85rem;text-decoration:none;color:var(--accent);background:var(--accentSoft);border-radius:6px;padding:.45rem .8rem;min-height:2.4rem;display:inline-flex;align-items:center}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.6rem}
+button{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.65rem 1rem;cursor:pointer;min-height:2.75rem}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.go{background:var(--accent);color:var(--ground);border-color:var(--accent);font-weight:600}
+button.card{display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;text-align:left;border-left:3px solid var(--accent);padding:.8rem .9rem}
+button.card b{font-size:.98rem}button.card span{font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font-size:.82rem;padding:.4rem .7rem;min-height:2.3rem;border-radius:99px}
+.note{background:var(--warnSoft);border-left:3px solid var(--warn);border-radius:0 6px 6px 0;padding:.7rem .9rem;font-size:.86rem;margin:.8rem 0}
+.bar{position:sticky;top:0;z-index:5;background:var(--ground);display:flex;align-items:center;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--line);margin-bottom:.8rem;flex-wrap:wrap}
+.bar .t{font-family:var(--fM);font-size:1rem;font-weight:600;min-width:4.5rem}
+.bar .t.low{color:var(--bad)}
+.bar .sp{flex:1}
+.meta{font-size:.78rem;color:var(--faint);font-family:var(--fM)}
+.qbox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.05rem}
+.stem{margin-bottom:.8rem;padding-bottom:.8rem;border-bottom:1px dashed var(--line);overflow-x:auto}
+.st{margin:.1rem 0 .5rem;font-size:.92rem}
+.rc{font-size:.92rem;line-height:1.65;margin:0}
+.qt{font-size:1rem;margin:0 0 .8rem}
+.opts{display:flex;flex-direction:column;gap:.45rem}
+.opt{text-align:left;display:flex;gap:.6rem;align-items:flex-start;width:100%}
+.opt .k{font-family:var(--fM);font-size:.8rem;color:var(--faint);min-width:1.2rem;padding-top:.1rem}
+.opt.sel{border-color:var(--accent);background:var(--accentSoft)}
+.opt.right{border-color:var(--good);background:var(--goodSoft)}
+.opt.wrong{border-color:var(--bad);background:var(--badSoft)}
+.exp{margin-top:.8rem;font-size:.88rem;background:var(--alt);border-radius:6px;padding:.65rem .8rem}
+.ctl{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
+.ctl .sp{flex:1}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(2.5rem,1fr));gap:.3rem;margin-top:1rem}
+.pal button{padding:0;min-height:2.5rem;font-size:.78rem;font-family:var(--fM)}
+.pal .ans{background:var(--accentSoft);border-color:var(--accent)}
+.pal .mk{border-color:var(--warn);box-shadow:inset 0 -3px 0 var(--warn)}
+.pal .cur{outline:2px solid var(--ink);outline-offset:1px}
+.pal .right{background:var(--goodSoft);border-color:var(--good)}.pal .wrong{background:var(--badSoft);border-color:var(--bad)}
+.pal .sec{grid-column:1/-1;font-size:.7rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em;margin-top:.4rem}
+table.dt,table.res{border-collapse:collapse;font-size:.86rem;width:100%}
+table.dt th,table.dt td,table.res th,table.res td{border:1px solid var(--line);padding:.35rem .5rem;text-align:right}
+table.dt th:first-child,table.dt td:first-child,table.res th:first-child,table.res td:first-child{text-align:left}
+table.dt th,table.res th{background:var(--alt);font-weight:600}
+svg.chart{width:100%;max-width:26rem;height:auto;display:block}
+svg.pie{max-width:14rem}
+svg .ax{stroke:var(--line)}svg .v{font-size:9px;fill:var(--muted);text-anchor:middle}svg .l{font-size:10px;fill:var(--muted);text-anchor:middle}
+svg .pv{font-size:10px;fill:#fff;text-anchor:middle;font-weight:600}
+svg .ln{fill:none;stroke-width:2}
+svg .c0{fill:var(--c0)}svg .c1{fill:var(--c1)}svg .c2{fill:var(--c2)}svg .c3{fill:var(--c3)}svg .c4{fill:var(--c4)}svg .c5{fill:var(--c5)}
+svg .ln.c0{stroke:var(--c0);fill:none}svg .ln.c1{stroke:var(--c1);fill:none}svg .ln.c2{stroke:var(--c2);fill:none}
+.lg{display:flex;flex-wrap:wrap;gap:.3rem .9rem;font-size:.78rem;color:var(--muted);margin-top:.3rem}
+.lg i{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;margin-right:.3rem;vertical-align:-1px}
+.lg i.c0{background:var(--c0)}.lg i.c1{background:var(--c1)}.lg i.c2{background:var(--c2)}.lg i.c3{background:var(--c3)}.lg i.c4{background:var(--c4)}.lg i.c5{background:var(--c5)}
+.score{display:flex;gap:1.4rem;flex-wrap:wrap;margin:.4rem 0 1rem}
+.score div{display:flex;flex-direction:column}.score b{font-size:1.6rem;font-family:var(--fD)}.score span{font-size:.78rem;color:var(--muted)}
+.rv{border-top:1px solid var(--line);padding:.8rem 0}
+.rv .who{font-size:.75rem;font-family:var(--fM);color:var(--faint)}
+.ok{color:var(--good)}.no{color:var(--bad)}
+.big{font-family:var(--fM);font-size:1.6rem;letter-spacing:.12em;text-align:center;padding:1rem;background:var(--alt);border-radius:8px;margin:.6rem 0}
+.grid-l{font-family:var(--fM);font-size:1.15rem;letter-spacing:.35em;line-height:1.9;text-align:center;background:var(--alt);border-radius:8px;padding:.8rem;word-break:break-all}
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(6rem,1fr));gap:.5rem;margin:.6rem 0}
+.pairs div{background:var(--alt);border-radius:6px;padding:.6rem;text-align:center;font-family:var(--fM);font-size:1.1rem}
+input[type=number],input[type=text]{font:inherit;font-size:1.1rem;width:100%;padding:.6rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-height:2.8rem}
+details{margin:.4rem 0}summary{cursor:pointer;color:var(--accent);font-size:.9rem;min-height:2.2rem;display:flex;align-items:center}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--faint);font-size:.8rem}
+[hidden]{display:none!important}
+</style></head><body><div class="wrap" id="app"></div>
+<script src="./rrb-gen.js"></script>
+<script>
+"use strict";
+const $ = s => document.querySelector(s), app = $("#app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function load(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+const SEC = RRB.SECTIONS, SEC_N = { [SEC[0]]: 30, [SEC[1]]: 30, [SEC[2]]: 20, [SEC[3]]: 20 };
+let timer = null, test = null;
+window.addEventListener("beforeunload", e => { if (test && !test.done && test.mode !== "drill") { e.preventDefault(); e.returnValue = ""; } });
+
+/* ---------------- home ---------------- */
+function home() {
+  stop(); test = null;
+  const hist = load("rrb.hist", []);
+  const groups = {};
+  RRB.TOPICS.forEach(t => (groups[t.sec + "|" + t.group] = groups[t.sec + "|" + t.group] || []).push(t));
+  app.innerHTML = `
+  <h1>Station Master practice</h1>
+  <p class="sub">Every question is generated fresh, with the answer computed by code. Pattern as reported for CEN 08/2026: 100 questions, 120 minutes, −⅓ per wrong answer.</p>
+  <div class="nav"><a href="./index.html">Library</a><a href="./7-RRB-Station-Master/README.md">Station Master plan</a><a href="./tutor.html">Ask the tutor</a></div>
+  <h2>Tests</h2>
+  <div class="modes">
+    <button class="card" data-m="mock"><b>Full mock</b><span>100 Q · 120 min · −⅓ · all four sections</span></button>
+    ${SEC.map((s, i) => `<button class="card" data-sec="${i}"><b>${esc(s)}</b><span>Sectional · ${SEC_N[s]} Q · ${SEC_N[s] * 1.2} min</span></button>`).join("")}
+    <button class="card" data-m="cbat"><b>CBAT trainer</b><span>Memory, perception speed, concentration</span></button>
+  </div>
+  <h2>Topic drills — 10 questions, instant answers</h2>
+  ${Object.entries(groups).map(([k, ts]) => `<h3>${esc(k.split("|")[1])} <span class="meta">${esc(k.split("|")[0])}</span></h3><div class="chips">${ts.map(t => `<button class="chip" data-t="${t.id}">${esc(t.name)}</button>`).join("")}</div>`).join("")}
+  <h2>Your results on this device</h2>
+  ${hist.length ? `<table class="res"><tr><th>When</th><th>Test</th><th>Score</th><th>Accuracy</th></tr>${hist.slice(-15).reverse().map(h => `<tr><td>${esc(h.when)}</td><td>${esc(h.name)}</td><td>${h.score.toFixed(2)} / ${h.max}</td><td>${h.att ? Math.round(h.cor / h.att * 100) : 0}%</td></tr>`).join("")}</table>
+   <p class="meta">Stored only in this browser. Copy every wrong answer into error-log.csv.</p>` : `<p class="sub">No tests yet. Start with one topic drill per syllabus area, then a sectional, then a full mock.</p>`}
+  <div class="note"><b>How to use this:</b> drills build method; sectionals build speed; take one full mock every week from the time the CBT date is announced. Skip a question you can't do in 90 seconds — a wrong answer costs a third of a mark.</div>
+  <footer>Generated questions, original passages. Not affiliated with any Railway Recruitment Board. Check the pattern against the official CEN.</footer>`;
+  app.querySelectorAll("[data-m=mock]").forEach(b => b.onclick = () => start("mock", "Full mock", RRB.mock(), 120 * 60));
+  app.querySelectorAll("[data-sec]").forEach(b => b.onclick = () => { const s = SEC[+b.dataset.sec], n = SEC_N[s]; start("section", s + " — sectional", s === SEC[0] ? RRB.sectionSet(s, 18, { only: t => t.group === "Mathematics" }).concat(RRB.sectionSet(s, 12, { only: t => t.group === "Basic science" })) : RRB.sectionSet(s, n), Math.round(n * 1.2 * 60)); });
+  app.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { const t = RRB.TOPICS.find(x => x.id === b.dataset.t); start("drill", t.name, RRB.drill(t.id, 10), 0); });
+  app.querySelector("[data-m=cbat]").onclick = cbatHome;
+  window.scrollTo(0, 0);
+}
+
+/* ---------------- test engine ---------------- */
+function start(mode, name, qs, secs) {
+  test = { mode, name, qs, ans: qs.map(() => null), mark: qs.map(() => false), i: 0, secs, left: secs, t0: Date.now(), done: false, showPal: false };
+  if (secs) { stop(); timer = setInterval(tick, 1000); }
+  render();
+}
+function stop() { if (timer) { clearInterval(timer); clearTimeout(timer); } timer = null; }
+function tick() {
+  test.left = test.secs - Math.floor((Date.now() - test.t0) / 1000);
+  const el = $("#tm"); if (el) { el.textContent = clock(test.left); el.classList.toggle("low", test.left < 300); }
+  if (test.left <= 0) finish();
+}
+const clock = s => { s = Math.max(0, s); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+
+function render() {
+  const T = test, q = T.qs[T.i], drill = T.mode === "drill", a = T.ans[T.i], show = drill && a !== null;
+  app.innerHTML = `
+  <div class="bar">${T.secs ? `<span class="t" id="tm">${clock(T.left)}</span>` : ""}<span class="meta">${esc(T.name)}</span><span class="sp"></span>
+    ${drill ? `<button id="quit">End</button>` : `<button id="palb">${T.showPal ? "Hide" : "All"} questions</button><button class="go" id="sub">Submit</button>`}</div>
+  <div class="meta">Q ${T.i + 1} of ${T.qs.length} · ${esc(q.sec)} · ${esc(q.topic)}</div>
+  <div class="qbox" style="margin-top:.4rem">
+    ${q.stem ? `<div class="stem">${q.stem}</div>` : ""}
+    <p class="qt">${q.q}</p>
+    <div class="opts">${q.opts.map((o, k) => `<button class="opt ${show ? (k === q.a ? "right" : k === a ? "wrong" : "") : (a === k ? "sel" : "")}" data-k="${k}"><span class="k">${"ABCD"[k]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+    ${show ? `<div class="exp"><b class="${a === q.a ? "ok" : "no"}">${a === q.a ? "Correct." : "Not quite."}</b> ${esc(q.exp)}</div>` : ""}
+  </div>
+  <div class="ctl">
+    <button id="prev" ${T.i ? "" : "disabled"}>← Prev</button>
+    ${drill ? "" : `<button id="clr">Clear</button><button id="mk">${T.mark[T.i] ? "Unmark" : "Mark for review"}</button>`}
+    <span class="sp"></span>
+    ${T.i < T.qs.length - 1 ? `<button class="go" id="next">Next →</button>` : `<button class="go" id="fin">${drill ? "See summary" : "Submit"}</button>`}
+  </div>
+  ${T.showPal && !drill ? palette() : ""}`;
+  app.querySelectorAll(".opt").forEach(b => b.onclick = () => { if (drill && T.ans[T.i] !== null) return; T.ans[T.i] = +b.dataset.k; render(); });
+  const on = (id, f) => { const e = $("#" + id); if (e) e.onclick = f; };
+  on("prev", () => { T.i--; render(); }); on("next", () => { T.i++; render(); });
+  on("clr", () => { T.ans[T.i] = null; render(); }); on("mk", () => { T.mark[T.i] = !T.mark[T.i]; render(); });
+  on("fin", confirmFinish); on("sub", confirmFinish); on("quit", finish);
+  on("palb", () => { T.showPal = !T.showPal; render(); });
+  app.querySelectorAll(".pal [data-j]").forEach(b => b.onclick = () => { T.i = +b.dataset.j; render(); });
+}
+function palette() {
+  let last = "", h = `<div class="pal">`;
+  test.qs.forEach((q, j) => { if (q.sec !== last) { h += `<div class="sec">${esc(q.sec)}</div>`; last = q.sec; } h += `<button data-j="${j}" class="${test.ans[j] !== null ? "ans" : ""} ${test.mark[j] ? "mk" : ""} ${j === test.i ? "cur" : ""}">${j + 1}</button>`; });
+  return h + `</div><p class="meta">Filled = answered · underline = marked for review</p>`;
+}
+function confirmFinish() {
+  if (test.mode === "drill") return finish();
+  const un = test.ans.filter(a => a === null).length;
+  if (confirm(un ? `${un} question(s) unanswered. Submit anyway?` : "Submit the test?")) finish();
+}
+function finish() {
+  stop(); const T = test; T.done = true;
+  const by = {}; let cor = 0, wr = 0;
+  T.qs.forEach((q, j) => { const s = by[q.sec] = by[q.sec] || { n: 0, c: 0, w: 0 }; s.n++; if (T.ans[j] === null) return; if (T.ans[j] === q.a) { s.c++; cor++; } else { s.w++; wr++; } });
+  const score = cor - wr / 3, used = Math.round((Date.now() - T.t0) / 1000);
+  if (T.mode !== "drill") { const h = load("rrb.hist", []); h.push({ when: new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short" }), name: T.name, score, max: T.qs.length, cor, att: cor + wr }); save("rrb.hist", h.slice(-100)); }
+  const topics = {}; T.qs.forEach((q, j) => { if (T.ans[j] !== null && T.ans[j] !== q.a) topics[q.topic] = (topics[q.topic] || 0) + 1; });
+  const weak = Object.entries(topics).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  app.innerHTML = `
+  <h1>${esc(T.name)}</h1>
+  <div class="score"><div><b>${score.toFixed(2)}</b><span>score / ${T.qs.length}</span></div><div><b class="ok">${cor}</b><span>correct</span></div><div><b class="no">${wr}</b><span>wrong (−${(wr / 3).toFixed(2)})</span></div><div><b>${T.qs.length - cor - wr}</b><span>skipped</span></div><div><b>${clock(used)}</b><span>time used</span></div></div>
+  <table class="res"><tr><th>Section</th><th>Qs</th><th>Correct</th><th>Wrong</th><th>Score</th></tr>${Object.entries(by).map(([s, v]) => `<tr><td>${esc(s)}</td><td>${v.n}</td><td>${v.c}</td><td>${v.w}</td><td>${(v.c - v.w / 3).toFixed(2)}</td></tr>`).join("")}</table>
+  ${weak.length ? `<h2>Drill these next</h2><div class="chips">${weak.map(([t, n]) => { const id = RRB.TOPICS.find(x => x.name === t); return `<button class="chip" data-t="${id ? id.id : ""}">${esc(t)} · ${n} wrong</button>`; }).join("")}</div>` : ""}
+  <div class="ctl"><button class="go" id="home">Back to tests</button><button id="cp">Copy wrong answers for error log</button><span class="sp"></span><label class="meta"><input type="checkbox" id="onlyw" checked> wrong & skipped only</label></div>
+  <h2>Review</h2><div id="rv"></div>`;
+  const drawRv = () => {
+    const only = $("#onlyw").checked;
+    $("#rv").innerHTML = T.qs.map((q, j) => {
+      const a = T.ans[j]; if (only && a === q.a) return "";
+      return `<div class="rv"><div class="who">Q${j + 1} · ${esc(q.topic)} · <span class="${a === q.a ? "ok" : "no"}">${a === null ? "skipped" : a === q.a ? "correct" : "wrong"}</span></div>
+        ${q.stem ? `<details><summary>Show data / passage</summary><div class="stem">${q.stem}</div></details>` : ""}
+        <p class="qt">${q.q}</p><div class="meta">Your answer: ${a === null ? "—" : esc(q.opts[a])} · Correct: <b>${esc(q.opts[q.a])}</b></div><div class="exp">${esc(q.exp)}</div></div>`;
+    }).join("") || `<p class="sub">Nothing to review — all correct.</p>`;
+  };
+  drawRv(); $("#onlyw").onchange = drawRv; $("#home").onclick = home;
+  $("#cp").onclick = () => {
+    const d = new Date().toISOString().slice(0, 10);
+    const rows = T.qs.map((q, j) => T.ans[j] !== null && T.ans[j] !== q.a ? `${d},RRB-SM,${q.topic.replace(/,/g, ";")},"${q.q.replace(/<[^>]+>/g, " ").replace(/"/g, "'")}",${q.opts[T.ans[j]].replace(/,/g, ";")},${q.opts[q.a].replace(/,/g, ";")}` : null).filter(Boolean).join("\n");
+    navigator.clipboard && navigator.clipboard.writeText(rows || "").then(() => { $("#cp").textContent = "Copied"; }, () => { $("#cp").textContent = "Copy failed"; });
+  };
+  app.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { if (b.dataset.t) { const t = RRB.TOPICS.find(x => x.id === b.dataset.t); start("drill", t.name, RRB.drill(t.id, 10), 0); } });
+  window.scrollTo(0, 0);
+}
+document.addEventListener("keydown", e => {
+  if (!test || test.done || e.target.tagName === "INPUT") return;
+  if (/^[1-4]$/.test(e.key)) { const b = app.querySelectorAll(".opt")[+e.key - 1]; if (b) b.click(); }
+  else if (e.key === "ArrowRight") { const b = $("#next"); if (b) b.click(); }
+  else if (e.key === "ArrowLeft") { const b = $("#prev"); if (b && !b.disabled) b.click(); }
+});
+
+/* ---------------- CBAT trainer ---------------- */
+const rn = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const shuf = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+function cbatHome() {
+  stop(); test = null;
+  const best = load("rrb.cbat", {});
+  app.innerHTML = `<h1>CBAT trainer</h1>
+  <p class="sub">The CBAT is a psychometric battery: it measures memory, perception and attention under time pressure, not knowledge. You must qualify in <b>every</b> test, and it carries 30% of the final merit.</p>
+  <div class="note">These drills train the same skills. They are not copies of the real battery, whose exact tests RRB does not publish in advance. Before the CBAT, use the official practice link RRB usually releases, and the CBAT section of a paid mock series.</div>
+  <div class="modes">
+    <button class="card" data-c="mem"><b>Memory</b><span>Remember 8 symbol–number pairs for 15 s${best.mem != null ? ` · best ${best.mem}/6` : ""}</span></button>
+    <button class="card" data-c="per"><b>Perception speed</b><span>Spot the exact match in 60 s${best.per != null ? ` · best ${best.per}` : ""}</span></button>
+    <button class="card" data-c="con"><b>Concentration</b><span>Count a letter in a confusable grid${best.con != null ? ` · best ${best.con}/3` : ""}</span></button>
+    <button class="card" data-c="dig"><b>Digit span</b><span>Repeat a growing number sequence${best.dig != null ? ` · best ${best.dig} digits` : ""}</span></button>
+  </div><div class="ctl"><button id="home">← Back to tests</button></div>`;
+  $("#home").onclick = home;
+  const go = { mem: cMem, per: cPer, con: cCon, dig: cDig };
+  app.querySelectorAll("[data-c]").forEach(b => b.onclick = () => go[b.dataset.c]());
+}
+function best(k, v, higher = true) { const b = load("rrb.cbat", {}); if (b[k] == null || (higher ? v > b[k] : v < b[k])) { b[k] = v; save("rrb.cbat", b); } }
+function cDone(msg) { stop(); app.innerHTML = `<h1>CBAT trainer</h1><div class="qbox"><p class="qt">${msg}</p></div><div class="ctl"><button class="go" id="again">Again</button><button id="back">All CBAT drills</button></div>`; }
+
+function cMem() {
+  const sy = shuf(["★", "▲", "●", "■", "◆", "♣", "♥", "☀", "✿", "☂", "♠", "✈"]).slice(0, 8), nums = sy.map(() => rn(10, 99));
+  let t = 15;
+  const draw = () => app.innerHTML = `<div class="bar"><span class="t">${t}s</span><span class="meta">Memorise</span></div><div class="pairs">${sy.map((s, i) => `<div>${s} = ${nums[i]}</div>`).join("")}</div>`;
+  draw(); stop(); timer = setInterval(() => { t--; if (t <= 0) { stop(); ask(0, 0); } else draw(); }, 1000);
+  const order = shuf([...sy.keys()]).slice(0, 6);
+  function ask(k, sc) {
+    if (k === 6) { best("mem", sc); cDone(`You recalled <b>${sc} of 6</b>.`); $("#again").onclick = cMem; $("#back").onclick = cbatHome; return; }
+    const i = order[k], opts = shuf([nums[i], ...shuf(nums.filter((_, j) => j !== i)).slice(0, 3)]);
+    app.innerHTML = `<div class="meta">${k + 1} of 6</div><div class="qbox"><p class="qt">Which number was paired with <b style="font-size:1.4rem">${sy[i]}</b>?</p><div class="opts">${opts.map(o => `<button class="opt" data-v="${o}"><span>${o}</span></button>`).join("")}</div></div>`;
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => ask(k + 1, sc + (+b.dataset.v === nums[i] ? 1 : 0)));
+  }
+}
+function cPer() {
+  const A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const code = () => Array.from({ length: 7 }, () => A[rn(0, A.length - 1)]).join("");
+  const tweak = s => { const a = s.split(""), i = rn(0, 6); if (Math.random() < .5 && i < 6) { [a[i], a[i + 1]] = [a[i + 1], a[i]]; } else { let c; do { c = A[rn(0, A.length - 1)]; } while (c === a[i]); a[i] = c; } return a.join(""); };
+  let ok = 0, bad = 0; const end = Date.now() + 60000;
+  stop(); timer = setInterval(() => { const l = Math.ceil((end - Date.now()) / 1000); const e = $("#tm"); if (e) e.textContent = l + "s"; if (l <= 0) { stop(); const net = ok - bad; best("per", net); cDone(`<b>${ok}</b> right, <b>${bad}</b> wrong in 60 s. Net <b>${net}</b>. Aim to beat it without adding errors.`); $("#again").onclick = cPer; $("#back").onclick = cbatHome; } }, 250);
+  (function next() {
+    const t = code(); const wrong = new Set(); while (wrong.size < 3) { const w = tweak(t); if (w !== t) wrong.add(w); }
+    const opts = shuf([t, ...wrong]);
+    app.innerHTML = `<div class="bar"><span class="t" id="tm">60s</span><span class="meta">Right ${ok} · Wrong ${bad}</span></div><div class="big">${t}</div><div class="opts">${opts.map(o => `<button class="opt" data-v="${o}" style="font-family:var(--fM);letter-spacing:.12em"><span>${o}</span></button>`).join("")}</div>`;
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => { if (b.dataset.v === t) ok++; else bad++; if (timer) next(); });
+  })();
+}
+function cCon() {
+  let round = 0, sc = 0;
+  (function next() {
+    if (round === 3) { best("con", sc); cDone(`<b>${sc} of 3</b> counts exactly right.`); $("#again").onclick = cCon; $("#back").onclick = cbatHome; return; }
+    const set = shuf([["b", "d", "p", "q"], ["6", "9", "0", "8"], ["E", "F", "P", "B"], ["m", "n", "u", "w"]])[0], tg = set[rn(0, 3)];
+    const g = Array.from({ length: 80 }, () => set[rn(0, 3)]), n = g.filter(c => c === tg).length;
+    let t = 30; round++;
+    app.innerHTML = `<div class="bar"><span class="t" id="tm">30s</span><span class="meta">Round ${round} of 3</span></div><p class="qt">How many times does <b style="font-family:var(--fM);font-size:1.3rem">${tg}</b> appear?</p><div class="grid-l">${g.join("")}</div><div class="ctl"><input type="number" id="cn" inputmode="numeric" placeholder="Count" style="max-width:9rem"><button class="go" id="ok">Submit</button></div>`;
+    const submit = () => { stop(); const v = +$("#cn").value; if (v === n) sc++; app.innerHTML = `<div class="qbox"><p class="qt">${v === n ? '<b class="ok">Exact.</b>' : `<b class="no">You said ${v || 0}.</b>`} The count was <b>${n}</b>.</p></div><div class="ctl"><button class="go" id="nx">Next</button></div>`; $("#nx").onclick = next; };
+    $("#ok").onclick = submit; $("#cn").focus();
+    stop(); timer = setInterval(() => { t--; const e = $("#tm"); if (e) e.textContent = t + "s"; if (t <= 0) submit(); }, 1000);
+  })();
+}
+function cDig() {
+  let len = 4;
+  (function round() {
+    const s = Array.from({ length: len }, () => rn(0, 9)).join("");
+    app.innerHTML = `<div class="meta">${len} digits</div><div class="big">${s}</div>`;
+    stop(); timer = setTimeout(() => {
+      timer = null;
+      app.innerHTML = `<div class="meta">${len} digits</div><p class="qt">Type the sequence.</p><div class="ctl"><input type="text" id="dg" inputmode="numeric" autocomplete="off" style="max-width:14rem"><button class="go" id="ok">Check</button></div>`;
+      $("#dg").focus();
+      const chk = () => { if ($("#dg").value.trim() === s) { len++; round(); } else { best("dig", len - 1); cDone(`You held <b>${len - 1} digits</b>. The sequence was ${s}.`); $("#again").onclick = cDig; $("#back").onclick = cbatHome; } };
+      $("#ok").onclick = chk; $("#dg").onkeydown = e => { if (e.key === "Enter") chk(); };
+    }, 700 * len);
+  })();
+}
+home();
+</script></body></html>

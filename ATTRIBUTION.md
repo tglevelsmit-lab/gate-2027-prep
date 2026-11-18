@@ -1,8 +1,9 @@
 # Attribution and licences
 
-This repository is a personal GATE 2027 study workspace. Nothing here is my own work
-except `README.md`, `HOW-TO-STUDY.md`, `error-log.csv`, `gate-2027-plan.html`, and the
-subject-wise splitting of the question banks.
+This repository is a personal GATE 2027 / RRB study workspace. Nothing here is my own work
+except `README.md`, `HOW-TO-STUDY.md`, `error-log.csv`, `gate-2027-plan.html`, the
+subject-wise splitting of the question banks, and the RRB practice engine
+(`rrb-practice.html`, `rrb-gen.js`), whose questions and passages are original.
 
 ## Textbooks — openly licensed, redistributed under their terms
 
@@ -22,10 +23,15 @@ subject-wise splitting of the question banks.
 | *Basics of Compiler Design* | Torben Mogensen (DIKU) | author-distributed, free |
 | *Database Design*, 2nd ed. | Adrienne Watt & Nelson Eng (BCcampus) | CC BY |
 | *Computer Networks: A Systems Approach* | Peterson & Davie | CC BY 4.0 |
+| *College Physics 2e* (selected chapters, `7-RRB-Station-Master/D-basic-science/`) | OpenStax (Rice University) | CC BY-NC-SA 4.0 |
+| *Contemporary Mathematics* (selected chapters, `7-RRB-Station-Master/`) | OpenStax (Rice University) | CC BY-NC-SA 4.0 |
+| *Prealgebra 2e* (selected chapters, `7-RRB-Station-Master/A-maths/`) | OpenStax (Rice University) | CC BY-NC-SA 4.0 |
 
 Share-alike and non-commercial terms apply downstream. This repository is
 non-commercial. Books were not modified apart from concatenating chapters that the
-publisher distributes separately (OSTEP, Erickson, Tarnoff).
+publisher distributes separately (OSTEP, Erickson, Tarnoff). The OpenStax books in
+`7-RRB-Station-Master/` are selected chapters only, recompressed. Download the full books
+free at <https://openstax.org>.
 
 ## Question banks
 
