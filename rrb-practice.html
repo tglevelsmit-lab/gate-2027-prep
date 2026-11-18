@@ -108,7 +108,7 @@ function home() {
   app.innerHTML = `
   <h1>Station Master practice</h1>
   <p class="sub">Every question is generated fresh, with the answer computed by code. Pattern as reported for CEN 08/2026: 100 questions, 120 minutes, −⅓ per wrong answer.</p>
-  <div class="nav"><a href="./index.html">Library</a><a href="./7-RRB-Station-Master/README.md">Station Master plan</a><a href="./tutor.html">Ask the tutor</a></div>
+  <div class="nav"><a href="./index.html">Library</a><a href="./rrb-syllabus.html">Syllabus tracker</a><a href="./7-RRB-Station-Master/README.md">Station Master plan</a><a href="./tutor.html">Ask the tutor</a></div>
   <h2>Tests</h2>
   <div class="modes">
     <button class="card" data-m="mock"><b>Full mock</b><span>100 Q · 120 min · −⅓ · all four sections</span></button>
@@ -296,4 +296,11 @@ function cDig() {
   })();
 }
 home();
+(function deepLink() {
+  const p = new URLSearchParams(location.search), d = p.get("drill"), m = p.get("mode");
+  const t = d && RRB.TOPICS.find(x => x.id === d);
+  if (t) start("drill", t.name, RRB.drill(t.id, 10), 0);
+  else if (m === "mock") app.querySelector("[data-m=mock]").click();
+  else if (m === "cbat") cbatHome();
+})();
 </script></body></html>

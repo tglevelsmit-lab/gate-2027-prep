@@ -1,0 +1,221 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Station Master Syllabus</title>
+<style>
+:root{--ground:#F6F8F7;--surface:#FFF;--alt:#EDF2F1;--line:#D3DDDB;--ink:#121A19;--muted:#57635F;--faint:#7C8783;
+--accent:#10555A;--accentSoft:#DCEBEA;--good:#1E6B3A;--goodSoft:#DDEFE3;--warn:#8A6210;--warnSoft:#F6EEDA;
+--fD:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+--fB:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--fM:ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;--line:#2C3937;
+--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;--accent:#63C6C2;--accentSoft:#16302F;--good:#6CC48D;--goodSoft:#16301F;--warn:#D9AC4E;--warnSoft:#2B2415}}
+:root[data-theme=dark]{--ground:#0D1413;--surface:#141D1C;--alt:#1B2625;--line:#2C3937;--ink:#E4EBE9;--muted:#9AA8A4;--faint:#74827E;
+--accent:#63C6C2;--accentSoft:#16302F;--good:#6CC48D;--goodSoft:#16301F;--warn:#D9AC4E;--warnSoft:#2B2415}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:var(--fB);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:52rem;margin:0 auto;padding:1.3rem 1rem 5rem}
+h1{font-family:var(--fD);font-size:1.6rem;font-weight:600;margin:0 0 .2rem;letter-spacing:-.01em}
+h2{font-family:var(--fD);font-size:1.15rem;font-weight:600;margin:2rem 0 .3rem}
+h3{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:700;margin:1.2rem 0 .5rem}
+.sub{color:var(--muted);font-size:.92rem;margin:0 0 1rem}
+a{color:var(--accent)}
+.nav{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 1rem}
+.nav a{font-size:.85rem;text-decoration:none;color:var(--accent);background:var(--accentSoft);border-radius:6px;padding:.45rem .8rem;min-height:2.4rem;display:inline-flex;align-items:center}
+.overall{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center}
+.overall .big{font-family:var(--fD);font-size:2rem;line-height:1}
+.prog{height:8px;background:var(--alt);border-radius:99px;overflow:hidden;flex:1;min-width:8rem}
+.prog i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .2s}
+.sechead{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.sechead .meta{white-space:nowrap}
+.meta{font-family:var(--fM);font-size:.74rem;color:var(--faint)}
+.topic{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:.7rem .85rem;margin:.45rem 0;display:grid;grid-template-columns:1fr auto;gap:.3rem 1rem;align-items:start}
+.topic.done{border-left:3px solid var(--good)}
+.topic .n{font-weight:600;font-size:.96rem}
+.topic .refs{grid-column:1/-1;font-size:.84rem;color:var(--muted);display:flex;flex-direction:column;gap:.15rem}
+.refs b{color:var(--faint);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;margin-right:.35rem}
+.checks{display:flex;gap:.9rem;grid-row:1}
+.checks label{display:flex;align-items:center;gap:.35rem;font-size:.8rem;color:var(--muted);cursor:pointer;min-height:2.2rem}
+.checks input{width:1.15rem;height:1.15rem;accent-color:var(--accent)}
+.drills{display:flex;flex-wrap:wrap;gap:.35rem}
+.drills a{font-size:.78rem;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:.2rem .6rem;color:var(--accent)}
+table{border-collapse:collapse;width:100%;font-size:.86rem;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:.45rem .55rem;text-align:left;vertical-align:top}
+th{background:var(--alt);font-weight:600}
+.scroll{overflow-x:auto}
+.note{background:var(--warnSoft);border-left:3px solid var(--warn);border-radius:0 6px 6px 0;padding:.7rem .9rem;font-size:.86rem;margin:1rem 0}
+button{font:inherit;font-size:.82rem;color:var(--muted);background:none;border:1px solid var(--line);border-radius:6px;padding:.4rem .7rem;cursor:pointer;min-height:2.3rem}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--faint);font-size:.8rem}
+@media (max-width:34rem){.topic{grid-template-columns:1fr}.checks{grid-row:auto}}
+</style></head><body><div class="wrap">
+<h1>Station Master syllabus</h1>
+<p class="sub">CEN 08/2026. Every topic in the CBT, where to learn it, and where to drill it. Tick <b>Studied</b> after reading the method and <b>Drilled</b> once you score 9–10/10 on its drill.</p>
+<div class="nav"><a href="./index.html">Library</a><a href="./rrb-practice.html">Practice</a><a href="./7-RRB-Station-Master/README.md">Week-by-week plan</a></div>
+
+<div class="overall"><div><div class="big" id="pct">0%</div><div class="meta">syllabus complete</div></div><div class="prog"><i id="bar" style="width:0"></i></div><div class="meta" id="cnt"></div></div>
+
+<h2>What you must clear</h2>
+<div class="scroll"><table>
+<tr><th>Stage</th><th>Requirement</th><th>Notes</th></tr>
+<tr><td><b>CBT</b><br><span class="meta">100 Q · 120 min · −⅓</span></td><td>Rank in the top <b>8× vacancies</b> of your RRB and category</td><td>A competitive rank, not just a pass. Aim for <b>75–85+</b> (an estimate: no cutoff exists yet for this pattern)</td></tr>
+<tr><td>CBT minimum</td><td>In past RRB recruitments: 40% UR, 30% OBC (non-creamy layer) / SC, 25% ST</td><td>OBC creamy layer counts as UR. Check the official notice</td></tr>
+<tr><td><b>CBAT</b></td><td>Qualify <b>every</b> test (T-score ≥ 42 in past cycles)</td><td>30% of final merit. Train with the <a href="./rrb-practice.html?mode=cbat">CBAT trainer</a></td></tr>
+<tr><td>Final merit</td><td>CBT 70% + CBAT 30%</td><td></td></tr>
+<tr><td>Document verification</td><td>10th certificate, degree, community certificate, ID, photos</td><td>Collect them now</td></tr>
+<tr><td><b>Medical A-2</b></td><td>Vision 6/9, 6/9 <b>without glasses</b>; colour, night and binocular vision tests</td><td>Get an eye test early if you're unsure</td></tr>
+</table></div>
+
+<h2>Marks plan</h2>
+<div class="scroll"><table>
+<tr><th>Section</th><th>Marks</th><th>Target</th><th>Note</th></tr>
+<tr><td>Basic Science &amp; Mathematics</td><td>30</td><td>24+</td><td>Maths is easy for you; science needs 3–4 weeks</td></tr>
+<tr><td>Data Analysis &amp; Interpretation</td><td>30</td><td>24+</td><td>Biggest section. Calculation speed decides it</td></tr>
+<tr><td>Logical Capability &amp; RC</td><td>20</td><td>15+</td><td>Syllogisms and RC need daily practice</td></tr>
+<tr><td>Mental Reasoning</td><td>20</td><td>18+</td><td>Fastest marks once drilled</td></tr>
+<tr><td><b>Total</b></td><td><b>100</b></td><td><b>80+</b></td><td></td></tr>
+</table></div>
+
+<div id="secs"></div>
+
+<h2>CBAT (after the CBT)</h2>
+<p class="sub">There is nothing to study: it's a psychometric battery testing memory, perception, concentration and, in past versions, depth perception and following instructions. Train with the <a href="./rrb-practice.html?mode=cbat">CBAT trainer</a>, RRB's official practice link when it appears, and a paid mock series.</p>
+
+<div class="note">Topic lists are taken from secondary sites summarising CEN 08/2026. Check them against the official notice and adjust. Ticks are saved in this browser only, so use the same device each time.</div>
+<button id="reset">Reset all ticks</button>
+<footer>Book links open in the library reader. NCERT books are free at <a href="https://ncert.nic.in/textbook.php">ncert.nic.in</a>. They are linked, not copied, because they're copyrighted.</footer>
+</div>
+<script>
+"use strict";
+const R = "./reader.html?f=", D = "7-RRB-Station-Master/";
+const B = {
+  M1: [D + "A-maths/M1-Number-System-HCF-LCM-AP-GP--OpenStax.pdf", "M1 Number system"],
+  M2: [D + "A-maths/M2-Percent-Ratio-Average-Profit-Interest--OpenStax.pdf", "M2 Percent/ratio/interest"],
+  M3: [D + "A-maths/M3-Algebra-Linear-Equations--OpenStax.pdf", "M3 Algebra"],
+  M4: [D + "A-maths/M4-Geometry-Mensuration-Trigonometry--OpenStax.pdf", "M4 Geometry & trig"],
+  M5: [D + "A-maths/M5-Probability-Statistics--OpenStax.pdf", "M5 Probability & stats"],
+  DI: [D + "B-data-interpretation/DI-Charts-Tables-Scatter-Venn--OpenStax.pdf", "DI book"],
+  LG: [D + "C-logic/Logic-Statements-Truth-Arguments--OpenStax.pdf", "Logic book"],
+  S1: [D + "D-basic-science/S1-Units-Measurement-Density--OpenStax.pdf", "S1 Units & density"],
+  S2: [D + "D-basic-science/S2-Motion-Force-Friction-Relative-Velocity--OpenStax.pdf", "S2 Motion & force"],
+  S3: [D + "D-basic-science/S3-Work-Power-Energy-Levers-Machines--OpenStax.pdf", "S3 Work & energy"],
+  S4: [D + "D-basic-science/S4-Heat-Temperature--OpenStax.pdf", "S4 Heat"],
+  S5: [D + "D-basic-science/S5-Electricity-Current-Ohm-Power--OpenStax.pdf", "S5 Electricity"],
+  QA: ["1-daily-aptitude/Quantitative-494Q.pdf", "Quantitative-494Q"],
+  AN: ["1-daily-aptitude/Analytical-139Q.pdf", "Analytical-139Q"],
+  VB: ["1-daily-aptitude/Verbal-376Q.pdf", "Verbal-376Q (RC)"],
+  SP: ["1-daily-aptitude/Spatial-49Q.pdf", "Spatial-49Q"],
+};
+const DR = { "m.pctOf": "Percentage", "m.pctMoreLess": "% more/less", "m.successive": "Successive %", "m.profit": "Profit & loss", "m.si": "Simple interest", "m.ci": "Compound interest", "m.ratioDiv": "Ratio division", "m.ratioChain": "Combining ratios", "m.avgNew": "Averages", "m.trainPole": "Trains: pole & platform", "m.trainsTwo": "Two trains", "m.avgSpeed": "Average speed", "m.work": "Time & work", "m.hcfLcm": "HCF & LCM", "m.ap": "AP", "m.divisible": "Divisibility", "m.unitDigit": "Unit digit", "m.circle": "Circle", "m.cylinder": "Cylinder", "m.cuboid": "Cuboid", "m.trigRatio": "Trig ratios", "m.trigValue": "Trig values", "m.probDice": "Dice", "m.probCards": "Cards", "m.probCoins": "Coins", "m.stats": "Mean/median/mode", "m.ages": "Ages", "m.linEq": "Linear equations",
+  "s.ke": "Kinetic energy", "s.keRatio": "KE vs speed", "s.work": "Work", "s.power": "Power", "s.density": "Density", "s.kmhToMs": "km/h ↔ m/s", "s.relVel": "Relative velocity", "s.motion": "Equations of motion", "s.ohm": "Ohm's law", "s.resistors": "Resistors", "s.units": "kWh bill", "s.heat": "Heat mcΔT", "s.temp": "Temperature scales", "s.lever": "Levers", "s.friction": "Friction", "s.weight": "Mass & weight", "s.facts": "Units & concepts",
+  "d.series": "Tables/bar/line", "d.pie": "Pie charts", "d.venn": "Venn", "d.suff": "Data sufficiency",
+  "l.syllogism": "Syllogism", "l.boolean": "Binary logic", "l.clock": "Clocks", "l.calendar": "Calendars", "l.blood": "Blood relations", "l.assumption": "Assumptions", "l.seating": "Seating puzzle", "l.rc": "RC passage",
+  "r.numSeries": "Number series", "r.letterSeries": "Letter series", "r.numAnalogy": "Number analogy", "r.wordAnalogy": "Word analogy", "r.coding": "Coding–decoding", "r.ranking": "Ranking", "r.direction": "Direction", "r.oddOne": "Odd one out" };
+// [key, topic, [[bookKey, where]...], ncert, [drills], extra]
+const S = [
+ ["Basic Science & Mathematics", "30 marks · ~18 maths + ~12 science", [
+  ["Mathematics", [
+   ["num", "Number system, divisibility, unit digit", [["M1", "Ch 3"]], "Class 9 Maths: Number Systems", ["m.divisible", "m.unitDigit"]],
+   ["hcf", "HCF & LCM", [["M1", "Prealgebra 2.4–2.5"]], "Class 10 Maths: Real Numbers", ["m.hcfLcm"]],
+   ["pct", "Percentages", [["M2", "Prealgebra Ch 6, Contemporary 6.1"]], "", ["m.pctOf", "m.pctMoreLess", "m.successive"]],
+   ["pl", "Profit, loss & discount", [["M2", "6.2–6.3"]], "", ["m.profit"]],
+   ["int", "Simple & compound interest", [["M2", "6.4, Contemporary 6.3–6.4"]], "", ["m.si", "m.ci"]],
+   ["ratio", "Ratio & proportion", [["M2", "5.6, 6.5, Contemporary 5.4"]], "", ["m.ratioDiv", "m.ratioChain"]],
+   ["avg", "Averages", [["M2", "5.5"]], "", ["m.avgNew"]],
+   ["tsd", "Time, speed & distance, trains", [["QA", "TSD questions"]], "", ["m.trainPole", "m.trainsTwo", "m.avgSpeed"]],
+   ["work", "Time & work", [["QA", "work questions"]], "", ["m.work"]],
+   ["alg", "Algebra, linear equations, ages", [["M3", "all"]], "Class 10 Maths: Pair of Linear Equations", ["m.linEq", "m.ages"]],
+   ["ap", "Arithmetic progression", [["M1", "3.10–3.11"]], "Class 10 Maths: Arithmetic Progressions", ["m.ap"]],
+   ["geo", "Geometry: lines, angles, triangles", [["M4", "10.1–10.4"]], "Class 9 Maths: Lines and Angles, Triangles", []],
+   ["trig", "Trigonometry", [["M4", "10.8"]], "Class 10 Maths: Introduction to Trigonometry, Some Applications of Trigonometry", ["m.trigRatio", "m.trigValue"]],
+   ["mens", "Mensuration: area & volume", [["M4", "10.6–10.7"]], "Class 10 Maths: Areas Related to Circles, Surface Areas and Volumes", ["m.circle", "m.cylinder", "m.cuboid"]],
+   ["prob", "Probability", [["M5", "Ch 7"]], "Class 10 Maths: Probability", ["m.probDice", "m.probCards", "m.probCoins"]],
+   ["stat", "Basic statistics", [["M5", "8.3–8.4"]], "Class 10 Maths: Statistics", ["m.stats"]],
+  ]],
+  ["Basic science", [
+   ["units", "Units & measurement", [["S1", "all"]], "Class 9 Science: Motion (units)", ["s.facts", "s.kmhToMs"]],
+   ["dens", "Mass, weight & density", [["S1", "Physics 11.2"]], "Class 9 Science: Gravitation", ["s.density", "s.weight"]],
+   ["motion", "Speed, velocity, acceleration", [["S2", "Ch 2"]], "Class 9 Science: Motion", ["s.motion"]],
+   ["relv", "Relative velocity", [["S2", "3.5"]], "", ["s.relVel"]],
+   ["force", "Force & Newton's laws", [["S2", "Ch 4"]], "Class 9 Science: Force and Laws of Motion", ["s.facts"]],
+   ["fric", "Friction", [["S2", "5.1"]], "Class 8 Science: Friction", ["s.friction"]],
+   ["wpe", "Work, power, energy, KE", [["S3", "Ch 7"]], "Class 9 Science: Work and Energy", ["s.work", "s.power", "s.ke", "s.keRatio"]],
+   ["lever", "Levers & simple machines", [["S3", "9.5"]], "", ["s.lever"]],
+   ["heat", "Heat & temperature", [["S4", "all"]], "Class 7 Science: Heat", ["s.heat", "s.temp"]],
+   ["elec", "Basic electricity", [["S5", "all"]], "Class 10 Science: Electricity", ["s.ohm", "s.resistors", "s.units"]],
+  ]]]],
+ ["Data Analysis & Interpretation", "30 marks · sets of ~5 questions per chart", [
+  ["", [
+   ["tab", "Tables", [["DI", "8.1"]], "", ["d.series"]],
+   ["bar", "Bar & line graphs", [["DI", "8.2"]], "", ["d.series"]],
+   ["pie", "Pie charts", [["DI", "8.2"]], "", ["d.pie"]],
+   ["scat", "Scatter plots", [["DI", "8.8"]], "", [], "Book only, no drill yet. Use a paid mock series too"],
+   ["dist", "Statistical distributions", [["M5", "8.6"]], "", []],
+   ["venn", "Venn diagrams", [["DI", "Ch 1 Sets"]], "", ["d.venn"]],
+   ["suff", "Data sufficiency", [], "", ["d.suff"]],
+   ["multi", "Multi-source data, inference from text", [["QA", "DI sets"]], "", [], "Practise in full mocks"],
+  ]]]],
+ ["Logical Capability & Reading Comprehension", "20 marks", [
+  ["", [
+   ["syl", "Syllogism", [["LG", "2.7 Logical arguments"]], "", ["l.syllogism"]],
+   ["bin", "Binary logic", [["LG", "2.2–2.6 Truth tables"]], "", ["l.boolean"]],
+   ["clk", "Clocks", [["M1", "3.7 Clock arithmetic"]], "", ["l.clock"]],
+   ["cal", "Calendars", [], "", ["l.calendar"]],
+   ["asm", "Assumptions", [], "", ["l.assumption"]],
+   ["blood", "Blood relations & family trees", [], "", ["l.blood"]],
+   ["puz", "Logic puzzles", [["AN", "all"]], "", ["l.seating"]],
+   ["rc", "Reading comprehension", [["VB", "RC passages"]], "", ["l.rc"], "Read one passage or newspaper editorial every day"],
+  ]]]],
+ ["Mental Reasoning", "20 marks · fastest marks", [
+  ["", [
+   ["ana", "Analogy (number & word)", [["AN", "analogy"]], "", ["r.numAnalogy", "r.wordAnalogy"]],
+   ["ser", "Series completion", [["AN", "series"]], "", ["r.numSeries", "r.letterSeries"]],
+   ["code", "Coding–decoding", [], "", ["r.coding"]],
+   ["rank", "Ranking", [], "", ["r.ranking"]],
+   ["arr", "Arrangement problems", [["SP", "all"]], "", ["l.seating", "r.direction"]],
+   ["odd", "Odd one out", [], "", ["r.oddOne"]],
+  ]]]],
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function load() { try { return JSON.parse(localStorage.getItem("rrb.syl") || "{}"); } catch (e) { return {}; } }
+function save(v) { try { localStorage.setItem("rrb.syl", JSON.stringify(v)); } catch (e) {} }
+let st = load();
+function render() {
+  let h = "";
+  S.forEach(([sec, sub, groups], si) => {
+    h += `<h2>${esc(sec)}</h2><div class="sechead"><span class="meta">${esc(sub)}</span><div class="prog"><i id="p${si}"></i></div><span class="meta" id="c${si}"></span></div>`;
+    groups.forEach(([g, topics]) => {
+      if (g) h += `<h3>${esc(g)}</h3>`;
+      topics.forEach(([k, name, books, ncert, drills, extra]) => {
+        const v = st[k] || {};
+        h += `<div class="topic ${v.s && v.d ? "done" : ""}" data-k="${k}"><div class="n">${esc(name)}</div>
+          <div class="checks"><label><input type="checkbox" data-f="s" ${v.s ? "checked" : ""}>Studied</label><label><input type="checkbox" data-f="d" ${v.d ? "checked" : ""}>Drilled</label></div>
+          <div class="refs">
+            ${books.length ? `<div><b>Book</b>${books.map(([b, w]) => `<a href="${R + B[b][0]}">${esc(B[b][1])}</a> · ${esc(w)}`).join("; ")}</div>` : ""}
+            ${ncert ? `<div><b>NCERT</b>${esc(ncert)}</div>` : ""}
+            ${drills.length ? `<div class="drills"><b style="align-self:center">Drill</b>${drills.map(d => `<a href="./rrb-practice.html?drill=${d}">${esc(DR[d])}</a>`).join("")}</div>` : ""}
+            ${extra ? `<div><b>Note</b>${esc(extra)}</div>` : ""}
+          </div></div>`;
+      });
+    });
+  });
+  document.getElementById("secs").innerHTML = h;
+  document.querySelectorAll(".topic input").forEach(cb => cb.onchange = () => {
+    const k = cb.closest(".topic").dataset.k; st[k] = st[k] || {}; st[k][cb.dataset.f] = cb.checked; save(st);
+    cb.closest(".topic").classList.toggle("done", !!(st[k].s && st[k].d)); totals();
+  });
+  totals();
+}
+function totals() {
+  let all = 0, got = 0;
+  S.forEach(([, , groups], si) => {
+    let n = 0, g = 0;
+    groups.forEach(([, ts]) => ts.forEach(([k]) => { n += 2; g += (st[k] && st[k].s ? 1 : 0) + (st[k] && st[k].d ? 1 : 0); }));
+    document.getElementById("p" + si).style.width = (g / n * 100) + "%";
+    document.getElementById("c" + si).textContent = `${g / 2 | 0}/${n / 2} done`;
+    all += n; got += g;
+  });
+  const p = Math.round(got / all * 100);
+  document.getElementById("pct").textContent = p + "%"; document.getElementById("bar").style.width = p + "%";
+  document.getElementById("cnt").textContent = `${got} of ${all} ticks`;
+}
+document.getElementById("reset").onclick = () => { if (confirm("Clear every tick on this device?")) { st = {}; save(st); render(); } };
+render();
+</script></body></html>
