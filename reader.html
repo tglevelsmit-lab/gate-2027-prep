@@ -106,7 +106,7 @@ if(!file){msg.innerHTML="No file given. Open a book from the <a href='./index.ht
 var short=file.split("/").pop().replace(/\.pdf$/,"");
 $("name").textContent=short; document.title=short+" — Reader";
 $("dl").href=file;
-var KEYP="pg:"+file, doc=null,N=0,wraps=[],done={},obs=null,base=1,zoom=1,vp1=null;
+var KEYP="pg:"+file, doc=null,N=0,wraps=[],done={},obs=null,curObs=null,lastW=0,base=1,zoom=1,vp1=null;
 try{zoom=parseFloat(localStorage.getItem("zoom")||"1")||1;}catch(e){}
 function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
@@ -114,7 +114,7 @@ function width(){return Math.min(main.clientWidth-8, 1100);}
 
 function build(){
   main.innerHTML=""; wraps=[]; done={};
-  base=width()/vp1.width;
+  lastW=width(); base=lastW/vp1.width;
   var s=base*zoom, w=vp1.width*s, h=vp1.height*s;
   for(var i=1;i<=N;i++){
     var d=document.createElement("div");
@@ -124,14 +124,21 @@ function build(){
     main.appendChild(d); wraps.push(d);
   }
   if(obs)obs.disconnect();
+  if(curObs)curObs.disconnect();
+  /* preload pages up to two screens away */
   obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting)draw(+e.target.dataset.p); });
+  },{rootMargin:"200% 0px",threshold:0});
+  /* the current page is the one crossing the middle of the screen */
+  curObs=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;
       var p=+e.target.dataset.p;
-      draw(p); $("pgin").value=p; store(KEYP,p);
+      if(document.activeElement!==$("pgin"))$("pgin").value=p;
+      store(KEYP,p);
     });
-  },{rootMargin:"200% 0px",threshold:0});
-  wraps.forEach(function(d){obs.observe(d);});
+  },{rootMargin:"-50% 0px -50% 0px",threshold:0});
+  wraps.forEach(function(d){obs.observe(d);curObs.observe(d);});
 }
 
 function draw(p){
@@ -145,7 +152,10 @@ function draw(p){
     c.style.width=cssVp.width+"px"; c.style.height=cssVp.height+"px";
     return page.render({canvasContext:c.getContext("2d"),
       viewport:page.getViewport({scale:s*dpr})}).promise.then(function(){
+      var before=wrap.getBoundingClientRect(), oldH=before.height;
       wrap.style.width=cssVp.width+"px"; wrap.style.height=cssVp.height+"px";
+      var dh=wrap.getBoundingClientRect().height-oldH;
+      if(dh&&before.bottom<=0)window.scrollBy(0,dh);
       wrap.innerHTML=""; wrap.appendChild(c);
       var tl=document.createElement("div");
       tl.className="textLayer";
@@ -188,7 +198,9 @@ $("pgin").onchange=function(e){
 };
 var rt=null;
 window.addEventListener("resize",function(){
-  if(!vp1)return; clearTimeout(rt);
+  if(!vp1)return;
+  var w=width(); if(Math.abs(w-lastW)<2)return;
+  clearTimeout(rt);
   rt=setTimeout(function(){var cur=+$("pgin").value||1;build();
     setTimeout(function(){if(wraps[cur-1])wraps[cur-1].scrollIntoView();},60);},250);
 });
