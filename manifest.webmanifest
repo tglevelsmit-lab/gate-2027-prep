@@ -1,0 +1,22 @@
+{
+  "name": "Station Master Prep",
+  "short_name": "SM Prep",
+  "description": "RRB Station Master (CEN 08/2026) study app: syllabus books, practice drills, full mocks and CBAT trainer.",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F6F8F7",
+  "theme_color": "#10555A",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Practice", "short_name": "Practice", "url": "./rrb-practice.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Full mock", "short_name": "Mock", "url": "./rrb-practice.html?mode=mock", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Syllabus tracker", "short_name": "Syllabus", "url": "./rrb-syllabus.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

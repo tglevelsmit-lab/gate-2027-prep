@@ -1,4 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#10555A"><link rel="icon" type="image/png" href="./icons/favicon-64.png"><link rel="apple-touch-icon" href="./icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="SM Prep"><script src="./pwa.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Station Master Practice</title>
 <style>
@@ -108,7 +109,7 @@ function home() {
   app.innerHTML = `
   <h1>Station Master practice</h1>
   <p class="sub">Every question is generated fresh, with the answer computed by code. Pattern per official CEN 08/2026 (para 15.1): 100 questions, 120 minutes, −⅓ per wrong answer.</p>
-  <div class="nav"><a href="./index.html">Library</a><a href="./rrb-syllabus.html">Syllabus tracker</a><a href="./7-RRB-Station-Master/README.md">Station Master plan</a><a href="./tutor.html">Ask the tutor</a></div>
+  <div class="nav"><a href="#" data-install>⬇ Install app</a><a href="./index.html">Library</a><a href="./rrb-syllabus.html">Syllabus tracker</a><a href="./7-RRB-Station-Master/README.md">Station Master plan</a><a href="./tutor.html">Ask the tutor</a></div>
   <h2>Tests</h2>
   <div class="modes">
     <button class="card" data-m="mock"><b>Full mock</b><span>100 Q · 120 min · −⅓ · all four sections</span></button>

@@ -1,4 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#10555A"><link rel="icon" type="image/png" href="./icons/favicon-64.png"><link rel="apple-touch-icon" href="./icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="SM Prep"><script src="./pwa.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Reader</title>
 <style>
@@ -170,7 +171,7 @@ function draw(p){
   }).catch(function(){done[p]=0;});
 }
 
-L.getDocument(file).promise.then(function(d){
+L.getDocument({url:file,disableRange:true,disableStream:true}).promise.then(function(d){
   doc=d; N=d.numPages;
   $("pg").textContent="/ "+N; $("pgin").max=N;
   return d.getPage(1);
